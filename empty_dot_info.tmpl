@@ -1,4 +1,4 @@
 {{ if eq .chezmoi.osRelease.idLike "debian" }}
 	echo "You are using a Debian based system"
 {{ end }}
-echo "You're email address is {{ .email | quote }}."
+echo "You're email address is {{ .email }}."
