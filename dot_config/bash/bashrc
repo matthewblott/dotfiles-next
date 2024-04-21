@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+# =============================================================================
+# Bash Vim Settings
+# =============================================================================
+
+# Use vim commands with the terminal, will need to set an alternative file
+set -o vi
+
+# =============================================================================
+# XDG
+# =============================================================================
+
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+# =============================================================================
+# Load any necessary OS bash specifics
+# =============================================================================
+
+if [ -f "${XDG_CONFIG_HOME}/bash/machine" ] ; then
+	. "${XDG_CONFIG_HOME}/bash/machine"
+fi
+
+# =============================================================================
+# Path
+# =============================================================================
+
+if [ -d "${HOME}/.local/bin" ] ; then
+  PATH="${HOME}/.local/bin:${PATH}"
+fi
+export PATH
+
+# =============================================================================
+# Aliases
+# =============================================================================
+
+if [ -f "${XDG_CONFIG_HOME}/bash/aliases" ] ; then
+	. "${XDG_CONFIG_HOME}/bash/aliases"
+fi
+
+# =============================================================================
+# XDG-Ninja
+# =============================================================================
+
+# Bash
+export HISTFILE="${XDG_STATE_HOME}"/bash/history
+
+# ZSH
+export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
