@@ -48,5 +48,8 @@ fi
 # Bash
 export HISTFILE="${XDG_STATE_HOME}"/bash/history
 
+# Sqlite
+export SQLITE_HISTORY="${XDG_STATE_HOME}"/sqlite/sqlite_history
+
 # ZSH
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
