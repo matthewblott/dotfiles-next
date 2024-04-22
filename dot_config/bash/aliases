@@ -9,6 +9,9 @@ alias grep='grep --color=auto'
 alias cl='clear'
 alias tree='tree -C'
 
+# Wget - prevents ~/.wget-hsts being created
+alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
+
 # Bat
 if which bat >/dev/null 2>&1; then
 	alias cat='bat'
