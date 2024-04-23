@@ -45,11 +45,28 @@ fi
 # XDG-Ninja
 # =============================================================================
 
-# Bash
-export HISTFILE="${XDG_STATE_HOME}"/bash/history
+# bash
+export HISTFILE="${XDG_STATE_HOME}/bash/history"
+
+# dotnet
+export DOTNET_CLI_HOME="${XDG_DATA_HOME}/dotnet"
+
+# nodejs
+export NODE_REPL_HISTORY="${XDG_DATA_HOME}/node_repl_history"
+
+# rbenv
+export RBENV_ROOT="${XDG_DATA_HOME}/rbenv"
 
 # Sqlite
-export SQLITE_HISTORY="${XDG_STATE_HOME}"/sqlite/sqlite_history
+export SQLITE_HISTORY="${XDG_STATE_HOME}/sqlite/sqlite_history"
 
-# ZSH
+# w3m
+export W3M_DIR="${XDG_DATA_HOME}/w3m"
+
+ERRFILE="${XDG_CACHE_HOME}/X11/xsession-errors"
+
+# Xauthority
+export XAUTHORITY="${XDG_RUNTIME_DIR}/Xauthority"
+
+# zsh
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
