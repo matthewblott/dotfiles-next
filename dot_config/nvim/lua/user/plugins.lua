@@ -23,54 +23,54 @@ require('lazy').setup({
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
-    },
+    'nvim-treesitter/nvim-treesitter-textobjects',
+  },
     build = ':TSUpdate',
   },
-	{
-		-- File explorer
-		"nvim-tree/nvim-tree.lua",
-		version = "*",
-		lazy = false,
-		dependencies = {
-			"nvim-tree/nvim-web-devicons",
-		},
-	},
   {
-		-- Theme
+    -- File explorer
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
+    lazy = false,
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+  },
+  {
+    -- Theme
     'loctvl842/monokai-pro.nvim',
   },
-	{
-		-- Working with tabs
-  	'romgrk/barbar.nvim',
-	},
-	{ 
-		-- Make sure the christoomey/vim-tmux-navigator
-		-- plugin is installed and the keymappings are set
-		'mrjones2014/smart-splits.nvim' 
-	},
-	{
-		"numToStr/Comment.nvim",
-		lazy = false,
-	},
-	{
+  {
+    -- Working with tabs
+    'romgrk/barbar.nvim',
+  },
+  { 
+    -- Make sure the christoomey/vim-tmux-navigator
+    -- plugin is installed and the keymappings are set
+    'mrjones2014/smart-splits.nvim' 
+  },
+  {
+    "numToStr/Comment.nvim",
+    lazy = false,
+  },
+  {
     -- For working with text
-		'preservim/vim-pencil',
-	},
-	{
+    'preservim/vim-pencil',
+  },
+  {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
     config = true
-	},
-	{'williamboman/mason.nvim'},
-	{'williamboman/mason-lspconfig.nvim'},
-	{'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
-	{'neovim/nvim-lspconfig'},
-	{'hrsh7th/cmp-nvim-lsp'},
-	{'hrsh7th/nvim-cmp'},
-	{'L3MON4D3/LuaSnip'},
-	{
-		'Exafunction/codeium.vim',
-		event = 'BufEnter'
-	},
+  },
+  {'williamboman/mason.nvim'},
+  {'williamboman/mason-lspconfig.nvim'},
+  {'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
+  {'neovim/nvim-lspconfig'},
+  {'hrsh7th/cmp-nvim-lsp'},
+  {'hrsh7th/nvim-cmp'},
+  {'L3MON4D3/LuaSnip'},
+  {
+    'Exafunction/codeium.vim',
+    event = 'BufEnter'
+  },
 }) 
