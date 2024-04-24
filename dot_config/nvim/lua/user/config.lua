@@ -223,8 +223,9 @@ lspconfig.emmet_language_server.setup({})
 local cmp = require('cmp')
 
 cmp.setup({
-  -- mapping = cmp.mapping.preset.insert({
-  cmp.mapping.preset.insert({
+  -- Even if mapping isn't mapped to anything it's still required for
+  -- the completions to work.
+  mapping = cmp.mapping.preset.insert({
     -- `Enter` key to confirm completion
     ['<CR>'] = cmp.mapping.confirm({select = false}),
 
