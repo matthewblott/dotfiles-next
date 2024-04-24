@@ -14,16 +14,16 @@ alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 
 # Bat
 if which bat >/dev/null 2>&1; then
-	alias cat='bat'
+  alias cat='bat'
 fi
 
 # Chezmoi
 if which chezmoi >/dev/null 2>&1; then
-	alias dotfiles='chezmoi'
+  alias dotfiles='chezmoi'
   alias cm='chezmoi'
 fi
 
 # Neovim
 if which nvim >/dev/null 2>&1; then
-	alias v='nvim'
+  alias v='nvim'
 fi
