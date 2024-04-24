@@ -216,4 +216,4 @@ end)
 -- Setup language servers
 local lspconfig = require('lspconfig')
 
-lspconfig.emmet_language_server.setup()
+lspconfig.emmet_language_server.setup({})
