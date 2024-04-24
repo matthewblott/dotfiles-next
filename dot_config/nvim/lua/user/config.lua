@@ -14,6 +14,7 @@ vim.wo.relativenumber = true
 -- Options
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
+-- Use spaces instead of tabs
 vim.opt.expandtab = true
 
 -- Sync clipboard between OS and Neovim.
@@ -175,8 +176,6 @@ vim.keymap.set('n', '<leader><leader>k', splits.swap_buf_up)
 vim.keymap.set('n', '<leader><leader>l', splits.swap_buf_right)
 
 
-
-
 -- =============================================================================
 -- Codeium
 -- =============================================================================
@@ -195,3 +194,25 @@ vim.keymap.set('i', '<c-?>', function() return vim.fn['codeium#Complete']() end,
 local mason = require('mason')
 
 mason.setup()
+
+
+-- =============================================================================
+-- LSP
+-- =============================================================================
+
+-- For lazy loading see:
+-- https://lsp-zero.netlify.app/v3.x/guide/lazy-loading-with-lazy-nvim.html
+
+
+local lsp_zero = require('lsp-zero')
+
+-- Enable keybindings only when you have a language server active in the current file.
+lsp_zero.on_attach(function(client, bufnr)
+  -- see :help lsp-zero-keybindings
+  -- to learn the available actions
+  lsp_zero.default_keymaps({buffer = bufnr})
+end)
+
+-- Setup language servers
+-- require'lspconfig'.emmet_ls.setup{}
+-- require'lspconfig'.tsserver.setup{}
