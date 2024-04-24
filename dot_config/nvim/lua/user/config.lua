@@ -81,6 +81,7 @@ vim.keymap.set('n', '<leader>fg', telescope.live_grep, {})
 vim.keymap.set('n', '<leader>fb', telescope.buffers, {})
 vim.keymap.set('n', '<leader>fh', telescope.help_tags, {})
 
+
 -- =============================================================================
 -- NVim Tree
 -- =============================================================================
@@ -223,3 +224,10 @@ local cmp = require('cmp')
 
 cmp.setup({})
 
+local mapping = cmp.mapping
+
+
+mapping = cmp.mapping.preset.insert({
+  -- `Enter` key to confirm completion
+  ['<CR>'] = cmp.mapping.confirm({select = false}),
+})
