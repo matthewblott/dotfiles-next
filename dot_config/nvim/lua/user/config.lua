@@ -227,10 +227,10 @@ cmp.setup({
   -- the completions to work.
   mapping = cmp.mapping.preset.insert({
     -- `Enter` key to confirm completion
-    ['<CR>'] = cmp.mapping.confirm({select = false}),
+    ['<cr>'] = cmp.mapping.confirm({select = false}),
 
     -- Ctrl+Space to trigger completion menu
-    -- ['<C-Space>'] = cmp.mapping.complete(),
+    ['<c-space>'] = cmp.mapping.complete(),
 
   })
 })
