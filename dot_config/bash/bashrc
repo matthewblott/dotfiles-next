@@ -21,7 +21,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 # =============================================================================
 
 if [ -f "${XDG_CONFIG_HOME}/bash/machine" ] ; then
-	. "${XDG_CONFIG_HOME}/bash/machine"
+  . "${XDG_CONFIG_HOME}/bash/machine"
 fi
 
 # =============================================================================
@@ -38,7 +38,7 @@ export PATH
 # =============================================================================
 
 if [ -f "${XDG_CONFIG_HOME}/bash/aliases" ] ; then
-	. "${XDG_CONFIG_HOME}/bash/aliases"
+  . "${XDG_CONFIG_HOME}/bash/aliases"
 fi
 
 # =============================================================================
