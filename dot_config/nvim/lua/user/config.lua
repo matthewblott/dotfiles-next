@@ -217,3 +217,8 @@ end)
 local lspconfig = require('lspconfig')
 
 lspconfig.emmet_language_server.setup({})
+
+-- Completions
+local cmp = require('cmp')
+
+cmp.setup({})
