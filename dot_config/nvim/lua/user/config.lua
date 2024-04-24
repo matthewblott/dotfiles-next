@@ -214,5 +214,6 @@ lsp_zero.on_attach(function(client, bufnr)
 end)
 
 -- Setup language servers
--- require'lspconfig'.emmet_ls.setup{}
--- require'lspconfig'.tsserver.setup{}
+local lspconfig = require('lspconfig')
+
+lspconfig.emmet_language_server.setup()
