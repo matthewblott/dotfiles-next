@@ -230,7 +230,7 @@ cmp.setup({
     ['<cr>'] = cmp.mapping.confirm({select = false}),
 
     -- Ctrl+Space to trigger completion menu
-    ['<C-space>'] = cmp.mapping.complete(),
+    ['<C-Space>'] = cmp.mapping.complete(),
 
   })
 })
