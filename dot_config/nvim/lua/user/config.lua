@@ -112,7 +112,7 @@ end
 local tree = require('nvim-tree')
 
 tree.setup({
-  -- on_attach = tree_on_attach,
+  on_attach = tree_on_attach,
 })
 
 local tree_api = require('nvim-tree.api')
