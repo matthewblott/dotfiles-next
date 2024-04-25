@@ -112,6 +112,7 @@ end
 local tree = require('nvim-tree')
 
 tree.setup({
+  -- Although on_attach isn't called here without the line below the keymappings above will not work.
   on_attach = tree_on_attach,
 })
 
