@@ -77,7 +77,7 @@ keymap('v', '<S-Tab>', '<gv', opts)
 local telescope = require('telescope.builtin')
 
 vim.keymap.set('n', '<leader>ff', telescope.find_files, {})
-vim.keymap.set('n', '<leader>fF', '', { callback = function() telescope.find_files({ hidden = true, no_ignore = true, desc  "Find files" }) end })
+vim.keymap.set('n', '<leader>fF', '', { callback = function() telescope.find_files({ hidden = true, no_ignore = true, desc  "Find foo" }) end })
 vim.keymap.set('n', '<leader>fg', telescope.live_grep, {})
 vim.keymap.set('n', '<leader>fb', telescope.buffers, {})
 vim.keymap.set('n', '<leader>fh', telescope.help_tags, {})
