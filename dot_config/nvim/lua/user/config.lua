@@ -107,7 +107,7 @@ local function tree_on_attach(bufnr)
   vim.keymap.set('n', 'h', api.node.open.tab, opts('Close node'))
   vim.keymap.set('n', 'l', api.node.open.tab, opts('Open node'))
   vim.keymap.set('n', 'm', api.fs.rename_full, opts('Move'))
-  vim.keymap.set('n', '<S-p>', api.node.open.preview, opts('Preview'))
+  vim.keymap.set('n', '<s-p>', api.node.open.preview, opts('Preview'))
 end
 
 local tree = require('nvim-tree')
@@ -167,11 +167,11 @@ vim.keymap.set('n', '<c-down>', splits.resize_down)
 vim.keymap.set('n', '<c-up>', splits.resize_up)
 vim.keymap.set('n', '<c-right>', splits.resize_right)
 -- moving between splits
-vim.keymap.set('n', '<C-h>', splits.move_cursor_left)
-vim.keymap.set('n', '<C-j>', splits.move_cursor_down)
-vim.keymap.set('n', '<C-k>', splits.move_cursor_up)
-vim.keymap.set('n', '<C-l>', splits.move_cursor_right)
-vim.keymap.set('n', '<C-\\>', splits.move_cursor_previous)
+vim.keymap.set('n', '<c-h>', splits.move_cursor_left)
+vim.keymap.set('n', '<c-j>', splits.move_cursor_down)
+vim.keymap.set('n', '<c-k>', splits.move_cursor_up)
+vim.keymap.set('n', '<c-l>', splits.move_cursor_right)
+vim.keymap.set('n', '<c-\\>', splits.move_cursor_previous)
 -- swapping buffers between windows
 vim.keymap.set('n', '<leader><leader>h', splits.swap_buf_left)
 vim.keymap.set('n', '<leader><leader>j', splits.swap_buf_down)
@@ -183,7 +183,7 @@ vim.keymap.set('n', '<leader><leader>l', splits.swap_buf_right)
 -- Codeium
 -- =============================================================================
 
-vim.keymap.set('i', '<C-g>', function () return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
+vim.keymap.set('i', '<c-g>', function () return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
 vim.keymap.set('i', '<c-;>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true, silent = true })
 vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true, silent = true })
 vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
