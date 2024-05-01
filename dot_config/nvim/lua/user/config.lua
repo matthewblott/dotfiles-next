@@ -108,6 +108,21 @@ local function tree_on_attach(bufnr)
   vim.keymap.set('n', 'l', api.node.open.tab, opts('Open node'))
   vim.keymap.set('n', 'm', api.fs.rename_full, opts('Move'))
   vim.keymap.set('n', '<s-p>', api.node.open.preview, opts('Preview'))
+
+  -- nvim-tree-preview
+  vim.keymap.set('n', 'P', preview.watch, opts 'Preview (Watch)')
+  vim.keymap.set('n', '<Esc>', preview.unwatch, opts 'Close Preview/Unwatch')
+  vim.keymap.set('n', '<Tab>', function()
+    local ok, node = pcall(api.tree.get_node_under_cursor)
+    if ok and node then
+      if node.type == 'directory' then
+        api.node.open.edit()
+      else
+        preview.node(node, { toggle_focus = true })
+      end
+    end
+  end, opts 'Preview')
+
 end
 
 local tree = require('nvim-tree')
