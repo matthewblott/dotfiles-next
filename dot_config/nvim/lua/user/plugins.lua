@@ -29,11 +29,12 @@ require('lazy').setup({
   },
   {
     -- File explorer
-    "nvim-tree/nvim-tree.lua",
-    version = "*",
+    'nvim-tree/nvim-tree.lua',
+    version = '*',
     lazy = false,
     dependencies = {
-      "nvim-tree/nvim-web-devicons",
+      'nvim-tree/nvim-web-devicons',
+      'b0o/nvim-tree-preview.lua',
     },
   },
   {
@@ -50,7 +51,7 @@ require('lazy').setup({
     'mrjones2014/smart-splits.nvim' 
   },
   {
-    "numToStr/Comment.nvim",
+    'numToStr/Comment.nvim',
     lazy = false,
   },
   {
@@ -59,7 +60,7 @@ require('lazy').setup({
   },
   {
     'windwp/nvim-autopairs',
-    event = "InsertEnter",
+    event = 'InsertEnter',
     config = true
   },
   {'williamboman/mason.nvim'},
