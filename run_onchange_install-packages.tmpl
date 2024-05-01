@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# bat
+# copy - pbcopy | xclip
+# dust
+# fzf
+# gh  - github cli
+# brew install ghi
+# gem install ghi
+# jq
+# tldr
+# tree
+# zoxide
+
+if ! which ripgrep >/dev/null 2>&1; then
+  {{ if eq .chezmoi.os "linux" -}}
+    sudo apt install ripgrep
+  {{ else if eq .chezmoi.os "darwin" -}}
+    brew install ripgrep
+  {{ end -}}
+fi
+
