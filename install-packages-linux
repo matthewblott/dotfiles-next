@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# bat
+# dust
+# fzf
+# gh
+# jq
+# tldr
+# tree
+# xclip
+# zoxide
+
+if ! which ripgrep >/dev/null 2>&1; then
+  sudo apt install ripgrep
+fi

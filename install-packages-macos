@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# bat
+# dust
+# fzf
+# gh
+# jq
+# pbcopy
+# tldr
+# tree
+# zoxide
+
+if ! which ripgrep >/dev/null 2>&1; then
+  brew install ripgrep
+fi
+
