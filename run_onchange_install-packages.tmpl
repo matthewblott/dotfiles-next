@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 {{ if eq .chezmoi.os "linux" -}}
-  . "install-packages-linux"
+  . "${HOME}/.local/share/chezmoi/install-packages-linux"
 {{ else if eq .chezmoi.os "darwin" -}}
-  . "install-packages-macos"
+  . "${HOME}/.local/share/chezmoi/install-packages-macos"
 {{ end -}}
