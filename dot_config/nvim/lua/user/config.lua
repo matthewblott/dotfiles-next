@@ -92,6 +92,8 @@ vim.keymap.set('n', '<leader>fh', telescope.help_tags, {})
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+local preview = require('nvim-tree-preview')
+
 local function tree_on_attach(bufnr)
   local api = require('nvim-tree.api')
 
