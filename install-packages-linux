@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# =============================================================================
+# Debian Packages
+# =============================================================================
+
 # bat
 # dust
 # fzf
@@ -14,3 +18,14 @@ if ! which ripgrep >/dev/null 2>&1; then
   sudo apt install ripgrep -y
   sudo apt install trash-cli -y
 fi
+
+
+# =============================================================================
+# NVM
+# =============================================================================
+
+if ! which nvm >/dev/null 2>&1; then
+  PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash'
+fi
+
+# need to resource file after install so npm packages can be installed
