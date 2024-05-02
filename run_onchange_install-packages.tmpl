@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 {{ if eq .chezmoi.os "linux" -}}
+  # install-packages-linux hash: {{ include "install-packages-linux" | sha256sum }}
   . "${HOME}/.local/share/chezmoi/install-packages-linux"
 {{ else if eq .chezmoi.os "darwin" -}}
+  # install-packages-macos hash: {{ include "install-packages-macos" | sha256sum }}
   . "${HOME}/.local/share/chezmoi/install-packages-macos"
 {{ end -}}

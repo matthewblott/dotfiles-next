@@ -11,6 +11,6 @@
 # zoxide
 
 if ! which ripgrep >/dev/null 2>&1; then
-  sudo apt install ripgrep
-  sudo apt install trash-cli
+  sudo apt install ripgrep -y
+  sudo apt install trash-cli -y
 fi
