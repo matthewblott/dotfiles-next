@@ -7,6 +7,36 @@ source "${XDG_CONFIG_HOME}/bash/bashrc"
 # NVM
 # =============================================================================
 
+# from bashrc
+export NVM_DIR="${XDG_DATA_HOME}/nvm"
+
+# This loads nvm bash_completion
+[ -s "${NVM_DIR}/bash_completion" ] && \. "${NVM_DIR}/bash_completion"
+
+# This lazy loads nvm
+nvm() {
+  unset -f nvm
+  # This loads nvm
+  [ -s "${NVM_DIR}/nvm.sh" ] && \. "${NVM_DIR}/nvm.sh" --no-use
+  nvm $@
+}
+
+# This resolves the default node version
+DEFAULT_NODE_VER=$(cat "$NVM_DIR/alias/default")
+
+while [ -s "$NVM_DIR/alias/$DEFAULT_NODE_VER" ] && [ ! -z "$DEFAULT_NODE_VER" ]; do
+  DEFAULT_NODE_VER="$(cat "$NVM_DIR/alias/$DEFAULT_NODE_VER")"
+done
+
+# This resolves the path to the default node version
+DEFAULT_NODE_VER_PATH="$(find $NVM_DIR/versions/node -maxdepth 1 -name "v${DEFAULT_NODE_VER#v}*" | sort -rV | head -n 1)"
+
+# This adds the default node version path to PATH
+if [ ! -z "$DEFAULT_NODE_VER_PATH" ]; then
+  export PATH="$DEFAULT_NODE_VER_PATH/bin:$PATH"
+fi
+# end from bashrc
+
 if ! which nvm >/dev/null 2>&1; then
   mkdir -p "${NVM_DIR}"
 
