@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# source the bashrc file
-source "~/.config/bash/bashrc"
-
 # =============================================================================
 # Debian Packages
 # =============================================================================
@@ -78,15 +75,7 @@ fi
 
 if ! which nvm >/dev/null 2>&1; then
   mkdir -p "${NVM_DIR}"
-
   PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash'
-
-  # Remove the default npm directories as they should be stored using XDG
-  rm -rf "$HOME/.npm"
-
-  # need to resource file after install so npm packages can be installed
-  source "${NVM_DIR}/nvm.sh"
-
 fi
 
 # Install the latest LTS version if it doesn't exist
@@ -95,9 +84,6 @@ if ! which node >/dev/null 2>&1; then
   lts_version=$(nvm ls-remote --lts | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' | tail -n 1)
   nvm install "${lts_version}"
 fi
-
-# Re-source the bash file so the default node path is set
-source "${XDG_CONFIG_HOME}/bash/bashrc"
 
 # =============================================================================
 # PNPM Packages

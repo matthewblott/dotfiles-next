@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source "${HOME}/.bashrc"
+
 {{ if eq .chezmoi.os "linux" -}}
   # install-packages-linux hash: {{ include "install-packages-linux" | sha256sum }}
   . "${HOME}/.local/share/chezmoi/install-packages-linux"
