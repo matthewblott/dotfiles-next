@@ -4,22 +4,58 @@
 # Debian Packages
 # =============================================================================
 
-# bat
-# dust
-# fzf
-# gh
-# jq
-# tldr
-# tree
-# xclip
-# zoxide
+# if ! which x /dev/null 2>&1; then
+#   sudo apt install x -y
+# fi
 
+# bat
+if ! which bat /dev/null 2>&1; then
+  sudo apt install bat -y
+fi
+
+# fzf
+if ! which fzf /dev/null 2>&1; then
+  sudo apt install fzf -y
+fi
+
+# gh
+if ! which gh /dev/null 2>&1; then
+  sudo apt install gh -y
+fi
+
+# jq
+if ! which jq /dev/null 2>&1; then
+  sudo apt install jq -y
+fi
+
+# ripgrep
 if ! which ripgrep >/dev/null 2>&1; then
   sudo apt install ripgrep -y
 fi
 
+# tldr
+if ! which tldr /dev/null 2>&1; then
+  sudo apt install tldr -y
+fi
+
+# trash
 if ! which trash >/dev/null 2>&1; then
   sudo apt install trash-cli -y
+fi
+
+# tree
+if ! which tree >/dev/null 2>&1; then
+  sudo apt install tree -y
+fi
+
+# xclip
+if ! which xclip /dev/null 2>&1; then
+  sudo apt install xclip -y
+fi
+
+# zoxide
+if ! which zoxide /dev/null 2>&1; then
+  sudo apt install zoxide -y
 fi
 
 # =============================================================================
@@ -52,7 +88,7 @@ source "${XDG_CONFIG_HOME}/bash/bashrc"
 
 
 # =============================================================================
-# PNPM
+# PNPM Packages
 # =============================================================================
 
 # First install pnpm with npm because it's already installed with nvm
