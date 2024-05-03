@@ -20,8 +20,13 @@ if which nvim >/dev/null 2>&1; then
 fi
 
 # =============================================================================
-# XDG
+# XDG folders
 # =============================================================================
+
+mkdir -p "${HOME}/.local/share"
+mkdir -p "${HOME}/.config"
+mkdir -p "${HOME}/.local/state"
+mkdir -p "${HOME}/.cache"
 
 export XDG_DATA_HOME="${HOME}/.local/share"
 export XDG_CONFIG_HOME="${HOME}/.config"
