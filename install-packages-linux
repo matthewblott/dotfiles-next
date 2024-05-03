@@ -65,43 +65,43 @@ fi
 # fi
 
 if ! which browser-sync >/dev/null 2>&1; then
-  npm install -g browser-sync
+  pnpm install -g browser-sync
 fi
 
 # Spellchecker for code
 if ! which cspell >/dev/null 2>&1; then
-  npm install -g cspell 
+  pnpm install -g cspell 
 fi
 
 # Scaffolder sometimes used by third parties
 if ! which degit >/dev/null 2>&1; then
-  npm install -g degit
+  pnpm install -g degit
 fi
 
 if ! which faker-cli >/dev/null 2>&1; then
-  npm install -g faker-cli
+  pnpm install -g faker-cli
 fi
 
 if ! which http-server >/dev/null 2>&1; then
-  npm install -g http-server
+  pnpm install -g http-server
 fi
 
 # Perl REPL
 if ! which perli >/dev/null 2>&1; then
-  npm install -g perli
+  pnpm install -g perli
 fi
 
 if ! which project-name-generator >/dev/null 2>&1; then
-  npm install -g project-name-generator
+  pnpm install -g project-name-generator
 fi
 
 # Convert sqlite tables to json
 if ! which sqlite-json >/dev/null 2>&1; then
-  npm install -g sqlite-json
+  pnpm install -g sqlite-json
 fi
 
 # Install yarn in case it's required by thrid parties
 if ! which yarn >/dev/null 2>&1; then
-  npm install -g yarn
+  pnpm install -g yarn
 fi
 
