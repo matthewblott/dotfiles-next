@@ -38,6 +38,11 @@ if ! which tldr /dev/null 2>&1; then
   sudo apt install tldr -y
 fi
 
+# tmux
+if ! which tmux >/dev/null 2>&1; then
+  sudo apt install tmux -y
+fi
+
 # trash
 if ! which trash >/dev/null 2>&1; then
   sudo apt install trash-cli -y
