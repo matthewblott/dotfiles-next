@@ -146,3 +146,15 @@ fi
 if ! which yarn >/dev/null 2>&1; then
   pnpm install -g yarn
 fi
+
+# =============================================================================
+# tmux
+# =============================================================================
+
+mkdir -p "${XDG_DATA_HOME}/tmux/plugins"
+
+# Install Tmux Plugin Manager
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+# Install tpm plugins
+"${XDG_DATA_HOME}/tmux/plugins/tpm/bin/install_plugins"
