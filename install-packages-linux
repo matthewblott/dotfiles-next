@@ -59,11 +59,16 @@ if ! which zoxide /dev/null 2>&1; then
 fi
 
 # =============================================================================
+# Other Packages
+# =============================================================================
+
+# dust
+
+# =============================================================================
 # NVM
 # =============================================================================
 
 if ! which nvm >/dev/null 2>&1; then
-
   mkdir -p "${NVM_DIR}"
 
   PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash'
@@ -85,7 +90,6 @@ fi
 
 # Re-source the bash file so the default node path is set
 source "${XDG_CONFIG_HOME}/bash/bashrc"
-
 
 # =============================================================================
 # PNPM Packages
@@ -127,14 +131,13 @@ if ! which perli >/dev/null 2>&1; then
   pnpm install -g perli
 fi
 
+# The better-sqlite3 library installation causes a crash, needs investigation
 # Convert sqlite tables to json
-if ! which sqlite-json >/dev/null 2>&1; then
-  # The better-sqlite3 library installation causes a crash, needs investigation
-  # pnpm install -g sqlite-json
-fi
+# if ! which sqlite-json >/dev/null 2>&1; then
+#   pnpm install -g sqlite-json
+# fi
 
 # Install yarn in case it's required by thrid parties
 if ! which yarn >/dev/null 2>&1; then
   pnpm install -g yarn
 fi
-
