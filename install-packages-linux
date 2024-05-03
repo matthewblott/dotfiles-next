@@ -47,6 +47,14 @@ if ! which node >/dev/null 2>&1; then
   nvm install "${lts_version}"
 fi
 
-# if ! which pnpm >/dev/null 2>&1; then
-#   npm install -g pnpm
-# fi
+# Re-source the bash file so the default node path is set
+source "${XDG_CONFIG_HOME}/bash/bashrc"
+
+
+# =============================================================================
+# PNPM
+# =============================================================================
+
+if ! which pnpm >/dev/null 2>&1; then
+  npm install -g pnpm
+fi
