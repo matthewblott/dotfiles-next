@@ -16,9 +16,11 @@
 
 if ! which ripgrep >/dev/null 2>&1; then
   sudo apt install ripgrep -y
-  sudo apt install trash-cli -y
 fi
 
+if ! which trash >/dev/null 2>&1; then
+  sudo apt install trash-cli -y
+fi
 
 # =============================================================================
 # NVM
