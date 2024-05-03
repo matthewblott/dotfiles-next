@@ -27,7 +27,24 @@ fi
 # =============================================================================
 
 if ! which nvm >/dev/null 2>&1; then
+  # The contents of npmrc are ignored so they are repeated here.
+  # prefix=${XDG_DATA_HOME}/npm                                                                                       
+  # cache=${XDG_CACHE_HOME}/npm                                                                                       
+  # init-module=${XDG_CONFIG_HOME}/npm/config/npm-init.js
+  # tmp=${XDG_RUNTIME_DIR}/npm
   PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash'
+
+  # Remove the default npm directories as they should be stored using XDG
+  rm -rf "$HOME/.npm"
+
+  # need to resource file after install so npm packages can be installed
+  # source "${NVM_DIR}/nvm.sh"
 fi
 
-# need to resource file after install so npm packages can be installed
+# if ! which node >/dev/null 2>&1; then
+#   nvm install --lts
+# fi
+
+# if ! which pnpm >/dev/null 2>&1; then
+#   npm install -g pnpm
+# fi
