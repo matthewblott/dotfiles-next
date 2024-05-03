@@ -103,6 +103,15 @@ fi
 
 # dust
 # xdg-ninja
+# lf
+# visidata
+# tgpt
+# kitty
+# neofetch
+# rclone
+# httpie
+
+# Also see: .config/readline/inputrc
 
 # =============================================================================
 # NVM
