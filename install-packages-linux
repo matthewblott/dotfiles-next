@@ -73,6 +73,9 @@ fi
 # NVM
 # =============================================================================
 
+# source the bash folder
+source "${XDG_CONFIG_HOME}/bash/bashrc"
+
 if ! which nvm >/dev/null 2>&1; then
   mkdir -p "${NVM_DIR}"
 
