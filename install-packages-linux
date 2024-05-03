@@ -13,9 +13,29 @@ if ! which bat /dev/null 2>&1; then
   sudo apt install bat -y
 fi
 
+# build-essential
+if ! which build-essential /dev/null 2>&1; then
+  sudo apt install build-essential -y
+fi
+
+# cmake
+if ! which cmake /dev/null 2>&1; then
+  sudo apt install cmake -y
+fi
+
+# curl
+if ! which curl /dev/null 2>&1; then
+  sudo apt install curl -y
+fi
+
 # fzf
 if ! which fzf /dev/null 2>&1; then
   sudo apt install fzf -y
+fi
+
+# gettext
+if ! which gettext /dev/null 2>&1; then
+  sudo apt install gettext -y
 fi
 
 # gh
@@ -26,6 +46,11 @@ fi
 # jq
 if ! which jq /dev/null 2>&1; then
   sudo apt install jq -y
+fi
+
+# ninja-build
+if ! which ninja-build /dev/null 2>&1; then
+  sudo apt install ninja-build -y
 fi
 
 # ripgrep
@@ -53,9 +78,18 @@ if ! which tree >/dev/null 2>&1; then
   sudo apt install tree -y
 fi
 
+# unzip
+if ! which unzip /dev/null 2>&1; then
+  sudo apt install unzip -y
+fi
+
 # xclip
 if ! which xclip /dev/null 2>&1; then
   sudo apt install xclip -y
+fi
+
+if ! which zip /dev/null 2>&1; then
+  sudo apt install zip -y
 fi
 
 # zoxide
@@ -68,6 +102,7 @@ fi
 # =============================================================================
 
 # dust
+# xdg-ninja
 
 # =============================================================================
 # NVM
