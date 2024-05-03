@@ -91,10 +91,6 @@ if ! which perli >/dev/null 2>&1; then
   pnpm install -g perli
 fi
 
-if ! which project-name-generator >/dev/null 2>&1; then
-  pnpm install -g project-name-generator
-fi
-
 # Convert sqlite tables to json
 if ! which sqlite-json >/dev/null 2>&1; then
   pnpm install -g sqlite-json
