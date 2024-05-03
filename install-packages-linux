@@ -93,7 +93,8 @@ fi
 
 # Convert sqlite tables to json
 if ! which sqlite-json >/dev/null 2>&1; then
-  pnpm install -g sqlite-json
+  # The better-sqlite3 library installation causes a crash, needs investigation
+  # pnpm install -g sqlite-json
 fi
 
 # Install yarn in case it's required by thrid parties
