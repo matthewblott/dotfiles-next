@@ -202,7 +202,9 @@ vim.keymap.set('n', '<leader><leader>l', splits.swap_buf_right)
 
 local codeium = require('codeium')
 
-codeium.setup()
+codeium.setup({
+  enable_chat = true,
+})
 
 vim.keymap.set('i', '<c-g>', function () return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
 vim.keymap.set('i', '<c-;>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true, silent = true })
@@ -251,7 +253,6 @@ cmp.setup({
   sources = {
     { name = "codeium" },
   },
-  enable_chat = true,
 
   -- Even if mapping isn't mapped to anything it's still required for
   -- the completions to work.
