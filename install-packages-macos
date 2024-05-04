@@ -142,9 +142,9 @@ if ! which xdg-ninja /dev/null 2>&1; then
 fi
 
 # xclip
-if ! which xclip /dev/null 2>&1; then
-  brew install xclip
-fi
+# if ! which xclip /dev/null 2>&1; then
+#   brew install xclip
+# fi
 
 # zip
 if ! which zip /dev/null 2>&1; then
