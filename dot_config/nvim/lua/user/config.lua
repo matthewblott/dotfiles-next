@@ -200,6 +200,10 @@ vim.keymap.set('n', '<leader><leader>l', splits.swap_buf_right)
 -- Codeium
 -- =============================================================================
 
+local codeium = require('codeium')
+
+codeium.setup()
+
 vim.keymap.set('i', '<c-g>', function () return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
 vim.keymap.set('i', '<c-;>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true, silent = true })
 vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true, silent = true })
