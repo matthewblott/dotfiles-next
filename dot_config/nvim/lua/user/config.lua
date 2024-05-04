@@ -200,11 +200,8 @@ vim.keymap.set('n', '<leader><leader>l', splits.swap_buf_right)
 -- Codeium
 -- =============================================================================
 
-local codeium = require('codeium')
-
-codeium.setup({
-  enable_chat = true,
-})
+-- N.B. when running Codeium Auth make sure you are running in tmux,
+-- the token won't be parsed properly otherwise and you'll receive an error.
 
 vim.keymap.set('i', '<c-g>', function () return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
 vim.keymap.set('i', '<c-;>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true, silent = true })

@@ -74,8 +74,4 @@ require('lazy').setup({
     'Exafunction/codeium.vim',
     event = 'BufEnter'
   },
-  -- {
-  --   'Exafunction/codeium.nvim',
-  --   event = 'BufEnter'
-  -- },
 }) 
