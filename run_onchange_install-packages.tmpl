@@ -3,9 +3,19 @@
 source "${HOME}/.bashrc"
 
 {{ if eq .chezmoi.os "linux" -}}
-  # install-packages-linux hash: {{ include "install-packages-linux" | sha256sum }}
-  . "${HOME}/.local/share/chezmoi/install-packages-linux"
+
+# install-packages-linux hash: {{ include "install-packages-linux" | sha256sum }}
+. "${HOME}/.local/share/chezmoi/install-packages-linux"
+
 {{ else if eq .chezmoi.os "darwin" -}}
-  # install-packages-macos hash: {{ include "install-packages-macos" | sha256sum }}
-  . "${HOME}/.local/share/chezmoi/install-packages-macos"
+
+if ! which brew /dev/null 2>&1; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# install-packages-macos hash: {{ include "install-packages-macos" | sha256sum }}
+. "${HOME}/.local/share/chezmoi/install-packages-macos"
+
 {{ end -}}
