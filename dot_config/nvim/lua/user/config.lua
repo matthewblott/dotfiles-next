@@ -249,10 +249,6 @@ lspconfig.tsserver.setup({})
 local cmp = require('cmp')
 
 cmp.setup({
-  
-  sources = {
-    { name = "codeium" },
-  },
 
   -- Even if mapping isn't mapped to anything it's still required for
   -- the completions to work.
