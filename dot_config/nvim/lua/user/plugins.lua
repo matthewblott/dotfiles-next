@@ -71,7 +71,11 @@ require('lazy').setup({
   {'hrsh7th/nvim-cmp'},
   {'L3MON4D3/LuaSnip'},
   {
-    'Exafunction/codeium.nvim',
+    'Exafunction/codeium.vim',
     event = 'BufEnter'
   },
+  -- {
+  --   'Exafunction/codeium.nvim',
+  --   event = 'BufEnter'
+  -- },
 }) 
