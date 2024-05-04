@@ -28,6 +28,22 @@ if ! which curl /dev/null 2>&1; then
   sudo apt install curl -y
 fi
 
+# deb-get
+if ! which deb-get /dev/null 2>&1; then
+  curl -sL https://raw.githubusercontent.com/wimpysworld/deb-get/main/deb-get | sudo -E bash -s install deb-get
+fi
+
+# dust
+# does not work on Linux arm
+# if ! which dust /dev/null 2>&1; then
+#   deb-get install du-dust
+# fi
+
+# exa
+if ! which exa /dev/null 2>&1; then
+  sudo apt install exa -y
+fi
+
 # fzf
 if ! which fzf /dev/null 2>&1; then
   sudo apt install fzf -y
@@ -48,9 +64,24 @@ if ! which jq /dev/null 2>&1; then
   sudo apt install jq -y
 fi
 
+# lsb-release
+if ! which lsb-release /dev/null 2>&1; then
+  sudo apt install lsb-release -y
+fi
+
+# neofetch
+if ! which neofetch /dev/null 2>&1; then
+  sudo apt install neofetch -y
+fi
+
 # ninja-build
 if ! which ninja-build /dev/null 2>&1; then
   sudo apt install ninja-build -y
+fi
+
+# rclone
+if ! which rclone /dev/null 2>&1; then
+  sudo apt install rclone -y
 fi
 
 # ripgrep
@@ -83,6 +114,11 @@ if ! which unzip /dev/null 2>&1; then
   sudo apt install unzip -y
 fi
 
+# wget
+if ! which wget /dev/null 2>&1; then
+  sudo apt install wget -y
+fi
+
 # xclip
 if ! which xclip /dev/null 2>&1; then
   sudo apt install xclip -y
@@ -101,17 +137,26 @@ fi
 # Other Packages
 # =============================================================================
 
-# dust
-# xdg-ninja
-# lf
-# visidata
-# tgpt
-# kitty
-# neofetch
-# rclone
-# httpie
-
 # Also see: .config/readline/inputrc
+
+# kitty
+# curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+
+# httpie
+# python -m pip install --upgrade pip wheel
+# python -m pip install httpie
+
+# tgpt
+# curl -sSL https://raw.githubusercontent.com/aandrew-me/tgpt/main/install | bash -s /usr/local/bin
+
+# xdg-ninja
+# Clone the repository somewhere, then run the ./xdg-ninja.sh script.
+
+# visidata
+# pip3 install visidata
+
+# lf
+# No package for linux arm, need to install with go
 
 # =============================================================================
 # NVM
