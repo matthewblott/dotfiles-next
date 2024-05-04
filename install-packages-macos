@@ -14,9 +14,8 @@ if ! which bat /dev/null 2>&1; then
 fi
 
 # build-essential
-if ! which build-essential /dev/null 2>&1; then
-  brew install build-essential
-fi
+# if ! which build-essential /dev/null 2>&1; then
+# fi
 
 # cmake
 if ! which cmake /dev/null 2>&1; then
@@ -34,9 +33,10 @@ if ! which dust /dev/null 2>&1; then
 fi
 
 # exa
-if ! which exa /dev/null 2>&1; then
-  brew install exa
-fi
+# exa has been disabled because it is not maintained upstream!
+# if ! which exa /dev/null 2>&1; then
+#   brew install exa
+# fi
 
 # fzf
 if ! which fzf /dev/null 2>&1; then
@@ -64,7 +64,8 @@ if ! which jq /dev/null 2>&1; then
 fi
 
 # kitty
-if ! which kitty /dev/null 2>&1; then
+# Kitty is stored in the main macOS root Applications folder so /dev/null doesn't apply.
+if ! which kitty; then
   brew install kitty
 fi
 
@@ -74,9 +75,8 @@ if ! which lf /dev/null 2>&1; then
 fi
 
 # lsb-release
-if ! which lsb-release /dev/null 2>&1; then
-  brew install lsb-release
-fi
+# if ! which lsb-release /dev/null 2>&1; then
+# fi
 
 # neofetch
 if ! which neofetch /dev/null 2>&1; then
@@ -84,14 +84,12 @@ if ! which neofetch /dev/null 2>&1; then
 fi
 
 # ninja-build
-if ! which ninja-build /dev/null 2>&1; then
-  brew install ninja-build
-fi
+# if ! which ninja-build /dev/null 2>&1; then
+# fi
 
 # pbcopy
-if ! which pbcopy /dev/null 2>&1; then
-  brew install pbcopy
-fi
+# if ! which pbcopy /dev/null 2>&1; then
+# fi
 
 # rclone
 if ! which rclone /dev/null 2>&1; then

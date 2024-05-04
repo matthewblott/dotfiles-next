@@ -5,7 +5,7 @@
 # =============================================================================
 
 # Use vim commands with the terminal, will need to set an alternative file
-set -o vi
+# set -o vi
 
 if which vi >/dev/null 2>&1; then
   export EDITOR=vi
