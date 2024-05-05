@@ -37,8 +37,8 @@ export PATH
 
 {{ if eq .chezmoi.os "darwin" }}
 
-if [ -f "$HOME/.config/bash/bashrc" ] ; then
-  . "$HOME/.config/bash/bashrc"
+if [ -f "$HOME/.bashrc" ] ; then
+  . "$HOME/.bashrc"
 fi
 
 {{ end }}
