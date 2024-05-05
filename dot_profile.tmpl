@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+# vim: filetype=bash
 {{ if eq .chezmoi.os "linux" }}
 # ~/.profile: executed by the command interpreter for login shells.
 # This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
@@ -31,4 +33,12 @@ fi
 PATH="$PATH:/usr/sbin:/sbin"
 export PATH
 # Lima END
+{{ end }}
+
+{{ if eq .chezmoi.os "darwin" }}
+
+if [ -f "$HOME/.config/bash/bashrc" ] ; then
+  . "$HOME/.config/bash/bashrc"
+fi
+
 {{ end }}
