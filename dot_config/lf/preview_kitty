@@ -9,25 +9,25 @@ y=$5
 filetype="$( file -Lb --mime-type "${file}")"
 
 if [[ "${filetype}" =~ ^image ]]; then
-    kitty +icat --silent --transfer-mode file --place "${w}x${h}@${x}x${y}" "${file}"
-    exit 1
+  kitty +icat --silent --transfer-mode file --place "${w}x${h}@${x}x${y}" "${file}"
+  exit 1
 fi
 
 if [[ "${filetype}" =~ ^video ]]; then
-    # vidthumb is from here:
-    # https://raw.githubusercontent.com/duganchen/kitty-pistol-previewer/main/vidthumb
-    kitty +icat --silent --transfer-mode file --place "${w}x${h}@${x}x${y}" "$(vidthumb "${file}")"
-    exit 1
+  # vidthumb is from here:
+  # https://raw.githubusercontent.com/duganchen/kitty-pistol-previewer/main/vidthumb
+  kitty +icat --silent --transfer-mode file --place "${w}x${h}@${x}x${y}" "$(vidthumb "${file}")"
+  exit 1
 fi
 
 if [[ "${filetype}" =~ ^text ]] || [[ "${filetype}" =~ json$ ]]; then
-    bat "${file}" --color=always
-    exit 1
+  bat "${file}" --color=always
+  exit 1
 fi
 
 if [[ "${filetype}" =~ pdf$ ]]; then
-    pdftotext "${file}" - | less
-    exit 1
+  pdftotext "${file}" - | less
+  exit 1
 fi
 
 case "${file}" in
