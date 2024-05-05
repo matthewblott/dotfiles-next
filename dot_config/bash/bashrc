@@ -7,16 +7,12 @@
 # Use vim commands with the terminal, will need to set an alternative file
 # set -o vi
 
-if which vi >/dev/null 2>&1; then
-  export EDITOR=vi
-fi
-
-if which vim >/dev/null 2>&1; then
-  export EDITOR=vim
-fi
-
 if which nvim >/dev/null 2>&1; then
   export EDITOR=nvim
+elif which vim >/dev/null 2>&1; then
+  export EDITOR=vim
+elif which vi >/dev/null 2>&1; then
+  export EDITOR=vi
 fi
 
 # =============================================================================
@@ -138,3 +134,11 @@ export XAUTHORITY="${XDG_RUNTIME_DIR}/Xauthority"
 
 # zsh
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
+
+
+# =============================================================================
+# Zoxide
+# =============================================================================
+
+# Zoxide (autojump replacement)
+eval "$(zoxide init --cmd a bash)"

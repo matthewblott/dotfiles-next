@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # vim: filetype=bash
 
 source "${HOME}/.bashrc"
@@ -7,7 +6,7 @@ source "${HOME}/.bashrc"
 {{ if eq .chezmoi.os "linux" -}}
 
 # install-packages-linux hash: {{ include "install-packages-linux" | sha256sum }}
-. "${HOME}/.local/share/chezmoi/install-packages-linux"
+source "${HOME}/.local/share/chezmoi/install-packages-linux"
 
 {{ else if eq .chezmoi.os "darwin" -}}
 
@@ -18,6 +17,6 @@ fi
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # install-packages-macos hash: {{ include "install-packages-macos" | sha256sum }}
-. "${HOME}/.local/share/chezmoi/install-packages-macos"
+source "${HOME}/.local/share/chezmoi/install-packages-macos"
 
 {{ end -}}
