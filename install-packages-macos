@@ -4,155 +4,158 @@
 # Brew Packages
 # =============================================================================
 
-# if ! which x /dev/null 2>&1; then
+# if ! command -v x &> /dev/null; then
 #   brew install x
 # fi
 
+
+if ! command -v brew &> /dev/null; then
+
 # bat
-if ! which bat /dev/null 2>&1; then
+if ! command -v bat &> /dev/null; then
   brew install bat
 fi
 
 # build-essential
-# if ! which build-essential /dev/null 2>&1; then
+# if ! command -v build-essential &> /dev/null; then
 # fi
 
 # cmake
-if ! which cmake /dev/null 2>&1; then
+if ! command -v cmake &> /dev/null; then
   brew install cmake
 fi
 
 # curl
-if ! which curl /dev/null 2>&1; then
+if ! command -v curl &> /dev/null; then
   brew install curl
 fi
 
 # dust
-if ! which dust /dev/null 2>&1; then
+if ! command -v dust &> /dev/null; then
   brew install dust
 fi
 
 # exa
 # exa has been disabled because it is not maintained upstream!
-# if ! which exa /dev/null 2>&1; then
+# if ! command -v exa &> /dev/null; then
 #   brew install exa
 # fi
 
 # fzf
-if ! which fzf /dev/null 2>&1; then
+if ! command -v fzf &> /dev/null; then
   brew install fzf
 fi
 
 # gettext
-if ! which gettext /dev/null 2>&1; then
+if ! command -v gettext &> /dev/null; then
   brew install gettext
 fi
 
 # gh
-if ! which gh /dev/null 2>&1; then
+if ! command -v gh &> /dev/null; then
   brew install gh
 fi
 
 # httpie
-if ! which httpie /dev/null 2>&1; then
+if ! command -v httpie &> /dev/null; then
   brew install httpie
 fi
 
 # jq
-if ! which jq /dev/null 2>&1; then
+if ! command -v jq &> /dev/null; then
   brew install jq
 fi
 
 # kitty
 # Kitty is stored in the main macOS root Applications folder so /dev/null doesn't apply.
-if ! which kitty; then
+if ! command -v kitty; then
   brew install kitty
 fi
 
 # lf
-if ! which lf /dev/null 2>&1; then
+if ! command -v lf &> /dev/null; then
   brew install lf 
 fi
 
 # lsb-release
-# if ! which lsb-release /dev/null 2>&1; then
+# if ! command -v lsb-release &> /dev/null; then
 # fi
 
 # neofetch
-if ! which neofetch /dev/null 2>&1; then
+if ! command -v neofetch &> /dev/null; then
   brew install neofetch
 fi
 
 # ninja-build
-# if ! which ninja-build /dev/null 2>&1; then
+# if ! command -v ninja-build &> /dev/null; then
 # fi
 
 # pbcopy
-# if ! which pbcopy /dev/null 2>&1; then
+# if ! command -v pbcopy &> /dev/null; then
 # fi
 
 # rclone
-if ! which rclone /dev/null 2>&1; then
+if ! command -v rclone &> /dev/null; then
   brew install rclone
 fi
 
 # ripgrep
-if ! which ripgrep >/dev/null 2>&1; then
+if ! command -v ripgrep >/dev/null 2>&1; then
   brew install ripgrep
 fi
 
 # tldr
-if ! which tldr /dev/null 2>&1; then
+if ! command -v tldr &> /dev/null; then
   brew install tldr
 fi
 
 # tmux
-if ! which tmux >/dev/null 2>&1; then
+if ! command -v tmux >/dev/null 2>&1; then
   brew install tmux
 fi
 
 # trash
-if ! which trash >/dev/null 2>&1; then
+if ! command -v trash >/dev/null 2>&1; then
   brew install trash-cli
 fi
 
 # tree
-if ! which tree >/dev/null 2>&1; then
+if ! command -v tree >/dev/null 2>&1; then
   brew install tree
 fi
 
 # unzip
-if ! which unzip /dev/null 2>&1; then
+if ! command -v unzip &> /dev/null; then
   brew install unzip
 fi
 
 # visidata
-if ! which vd /dev/null 2>&1; then
+if ! command -v vd &> /dev/null; then
   brew install saulpw/vd/visidata
 fi
 
 # wget
-if ! which wget /dev/null 2>&1; then
+if ! command -v wget &> /dev/null; then
   brew install wget
 fi
 
 # xdg-ninja
-if ! which xdg-ninja /dev/null 2>&1; then
+if ! command -v xdg-ninja &> /dev/null; then
   brew install xdg-ninja
 fi
 
 # xclip
-# if ! which xclip /dev/null 2>&1; then
+# if ! command -v xclip &> /dev/null; then
 #   brew install xclip
 # fi
 
 # zip
-if ! which zip /dev/null 2>&1; then
+if ! command -v zip &> /dev/null; then
   brew install zip
 fi
 
 # zoxide
-if ! which zoxide /dev/null 2>&1; then
+if ! command -v zoxide &> /dev/null; then
   brew install zoxide
 fi
 
@@ -169,13 +172,13 @@ fi
 # NVM
 # =============================================================================
 
-if ! which nvm >/dev/null 2>&1; then
+if ! command -v nvm >/dev/null 2>&1; then
   mkdir -p "${NVM_DIR}"
   PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash'
 fi
 
 # Install the latest LTS version if it doesn't exist
-if ! which node >/dev/null 2>&1; then
+if ! command -v node >/dev/null 2>&1; then
   # Filter to get the latest LTS version
   lts_version=$(nvm ls-remote --lts | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' | tail -n 1)
   nvm install "${lts_version}"
@@ -186,49 +189,49 @@ fi
 # =============================================================================
 
 # First install pnpm with npm because it's already installed with nvm
-if ! which pnpm >/dev/null 2>&1; then
+if ! command -v pnpm >/dev/null 2>&1; then
   npm install -g pnpm
 fi
 
-# if ! which x >/dev/null 2>&1; then
+# if ! command -v x >/dev/null 2>&1; then
 #   npm install -g x
 # fi
 
-if ! which browser-sync >/dev/null 2>&1; then
+if ! command -v browser-sync >/dev/null 2>&1; then
   pnpm install -g browser-sync
 fi
 
 # Spellchecker for code
-if ! which cspell >/dev/null 2>&1; then
+if ! command -v cspell >/dev/null 2>&1; then
   pnpm install -g cspell 
 fi
 
 # Scaffolder sometimes used by third parties
-if ! which degit >/dev/null 2>&1; then
+if ! command -v degit >/dev/null 2>&1; then
   pnpm install -g degit
 fi
 
-if ! which faker-cli >/dev/null 2>&1; then
+if ! command -v faker-cli >/dev/null 2>&1; then
   pnpm install -g faker-cli
 fi
 
-if ! which http-server >/dev/null 2>&1; then
+if ! command -v http-server >/dev/null 2>&1; then
   pnpm install -g http-server
 fi
 
 # Perl REPL
-if ! which perli >/dev/null 2>&1; then
+if ! command -v perli >/dev/null 2>&1; then
   pnpm install -g perli
 fi
 
 # The better-sqlite3 library installation causes a crash, needs investigation
 # Convert sqlite tables to json
-# if ! which sqlite-json >/dev/null 2>&1; then
+# if ! command -v sqlite-json >/dev/null 2>&1; then
 #   pnpm install -g sqlite-json
 # fi
 
 # Install yarn in case it's required by thrid parties
-if ! which yarn >/dev/null 2>&1; then
+if ! command -v yarn >/dev/null 2>&1; then
   pnpm install -g yarn
 fi
 
