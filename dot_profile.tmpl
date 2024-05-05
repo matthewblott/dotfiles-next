@@ -33,9 +33,8 @@ fi
 PATH="$PATH:/usr/sbin:/sbin"
 export PATH
 # Lima END
-{{ end }}
 
-{{ if eq .chezmoi.os "darwin" }}
+{{ else if eq .chezmoi.os "darwin" }}
 
 if [ -f "$HOME/.bashrc" ] ; then
   . "$HOME/.bashrc"
