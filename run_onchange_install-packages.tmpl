@@ -10,7 +10,8 @@ source "${HOME}/.local/share/chezmoi/install-packages-linux"
 
 {{ else if eq .chezmoi.os "darwin" -}}
 
-if ! which brew /dev/null 2>&1; then
+# Install homebrew if it's not installed
+if ! command -v brew &> /dev/null; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
