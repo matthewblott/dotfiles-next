@@ -8,11 +8,11 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[0
 # Machine Specific Settings
 # =============================================================================
 
-{{ if eq .chezmoi.os "linux" -}}
+{{ if eq .chezmoi.os "linux" }}
 
 export TERM=xterm-256color
 
-{{ else if eq .chezmoi.os "darwin" -}}
+{{ else if eq .chezmoi.os "darwin" }}
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
@@ -87,6 +87,7 @@ export PATH
 if [ -f "${XDG_DATA_HOME}/git/git-completion.bash" ] ; then
   source "${XDG_DATA_HOME}/git/git-completion.bash"
 fi
+
 # =============================================================================
 # Starship
 # =============================================================================

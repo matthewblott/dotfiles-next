@@ -462,7 +462,20 @@ if ! command -v nvim &> /dev/null; then
   {{ if eq .chezmoi.os "darwin" }}
     brew install nvim
   {{ else if eq .chezmoi.os "linux" }}
-    echo 'nvim not installed'
+    git clone "https://github.com/neovim/neovim"
+
+    cd neovim
+
+    git checkout stable
+
+    make CMAKE_BUILD_TYPE=RelWithDebInfo
+
+    sudo make install
+
+    if [ -d "${HOME}/nvim" ] ; then
+      rm -rf "${HOME}/nvim"
+    fi
+
   {{ else }}
     echo 'nvim not installed'
   {{ end }}
