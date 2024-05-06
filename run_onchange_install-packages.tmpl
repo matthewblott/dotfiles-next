@@ -383,6 +383,7 @@ if [ ! -d "${NVM_DIR}" ] ; then
   mkdir -p "${NVM_DIR}"
 fi
 
+# if ! command -v nvm >/dev/null 2>&1; then
 if [ ! -d "${NVM_DIR}/.git" ] ; then
   PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash'
 fi
@@ -465,21 +466,20 @@ if ! command -v nvim &> /dev/null; then
   {{ if eq .chezmoi.os "darwin" }}
     brew install nvim
   {{ else if eq .chezmoi.os "linux" }}
-    git clone "https://github.com/neovim/neovim"
+    git clone "https://github.com/neovim/neovim" "${HOME}/neovim"
 
-    cd neovim
+    cd "${HOME}/neovim"
 
     git checkout stable
 
-    make CMAKE_BUILD_TYPE=RelWithDebInfo
-
+    sudo make CMAKE_BUILD_TYPE=RelWithDebInfo
     sudo make install
 
-    if [ -d "${HOME}/nvim" ] ; then
-      rm -rf "${HOME}/nvim"
+    if [ -d "${HOME}/neovim" ] ; then
+      rm -rf "${HOME}/neovim"
     fi
 
   {{ else }}
-    echo 'nvim not installed'
+    echo 'neovim not installed'
   {{ end }}
 fi
