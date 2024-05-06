@@ -81,8 +81,7 @@ fi
 # dust
 # if ! command -v dust &> /dev/null; then
   {{ if eq .chezmoi.os "darwin" }}
-    echo ' not installed'
-#     brew install dust
+     brew install dust
 #   # {{ else if eq .chezmoi.os "linux" }}
 #     # deb-get
 #     # if ! command -v deb-get &> /dev/null; then
@@ -93,6 +92,7 @@ fi
 #     # if ! command -v dust &> /dev/null; then
 #     #   deb-get install du-dust
 #     # fi
+    # echo ' not installed'
   {{ else }}
     echo ' not installed'
   {{ end }}
@@ -103,9 +103,9 @@ fi
 # exa
 if ! command -v exa &> /dev/null; then
   {{ if eq .chezmoi.os "darwin" }}
-    echo 'exa not installed'
     # exa has been disabled because it is not maintained upstream!
     # brew install exa
+    echo 'exa not installed'
   {{ else if eq .chezmoi.os "linux" }}
     sudo apt install exa -y
   {{ else }}
@@ -147,20 +147,22 @@ if ! command -v gh &> /dev/null; then
 fi
 
 # git autocompletions
-# curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
-# chmod +x ~/.git-completion.bash
-# if [ -f ~/.git-completion.bash ]; then
-#   source ~/.git-completion.bash
-# fi
+if [ ! -d "${XDG_DATA_HOME}/git" ] ; then
+  mkdir -p "${XDG_DATA_HOME}/git"
+  if [ ! -f "${XDG_DATA_HOME}/git/git-completion.bash" ] ; then
+    curl "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash" -o "${XDG_DATA_HOME}/git/git-completion.bash"
+    chmod +x "${XDG_DATA_HOME}/git/git-completion.bash"
+  fi
+fi
 
 # httpie
 if ! command -v httpie &> /dev/null; then
   {{ if eq .chezmoi.os "darwin" }}
     brew install httpie
   {{ else if eq .chezmoi.os "linux" }}
-    echo ' not installed'
     # python -m pip install --upgrade pip wheel
     # python -m pip install httpie
+    echo 'httpie not installed'
   {{ else }}
     echo 'httpie not installed'
   {{ end }}
