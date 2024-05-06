@@ -1,27 +1,12 @@
 #!/usr/bin/env bash
 # vim: filetype=bash
 
-# =============================================================================
-# Bash Vim Settings
-# =============================================================================
-
-# Use vim commands with the terminal, will need to set an alternative file
-# set -o vi
-
-if which nvim >/dev/null 2>&1; then
-  export EDITOR=nvim
-elif which vim >/dev/null 2>&1; then
-  export EDITOR=vim
-elif which vi >/dev/null 2>&1; then
-  export EDITOR=vi
-fi
+# Color prompt
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
 # =============================================================================
 # Machine Specific Settings
 # =============================================================================
-
-# Color prompt
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
 {{ if eq .chezmoi.os "linux" -}}
 
@@ -61,19 +46,29 @@ export XDG_STATE_HOME="${HOME}/.local/state"
 export XDG_CACHE_HOME="${HOME}/.cache"
 
 # =============================================================================
-# Load any necessary OS bash specifics
+# Bash
 # =============================================================================
 
-if [ -f "${XDG_CONFIG_HOME}/bash/machine" ] ; then
-  source "${XDG_CONFIG_HOME}/bash/machine"
+if [ ! -d "${XDG_CONFIG_HOME}/bash" ] ; then
+  mkdir -p "${XDG_STATE_HOME}/bash"
 fi
 
-# =============================================================================
-# Git
-# =============================================================================
+export HISTFILE="${XDG_STATE_HOME}/bash/history"
 
-if [ -f "${XDG_DATA_HOME}/git/git-completion.bash" ] ; then
-  source "${XDG_DATA_HOME}/git/git-completion.bash"
+if [ -f "${HOME}/.bash_history" ] ; then
+  mv "${HOME}/.bash_history" "${HISTFILE}"
+fi
+
+# Bash Vim Settings
+# Use vim commands with the terminal, will need to set an alternative file
+# set -o vi
+
+if which nvim >/dev/null 2>&1; then
+  export EDITOR=nvim
+elif which vim >/dev/null 2>&1; then
+  export EDITOR=vim
+elif which vi >/dev/null 2>&1; then
+  export EDITOR=vi
 fi
 
 # =============================================================================
@@ -85,6 +80,13 @@ if [ -d "${HOME}/.local/bin" ] ; then
 fi
 export PATH
 
+# =============================================================================
+# Git
+# =============================================================================
+
+if [ -f "${XDG_DATA_HOME}/git/git-completion.bash" ] ; then
+  source "${XDG_DATA_HOME}/git/git-completion.bash"
+fi
 # =============================================================================
 # Starship
 # =============================================================================
@@ -168,22 +170,22 @@ if which nvim >/dev/null 2>&1; then
   alias v='nvim'
 fi
 
+# =============================================================================
+# Ruby
+# =============================================================================
+
+# rbenv
+export RBENV_ROOT="${XDG_DATA_HOME}/rbenv"
 
 # =============================================================================
 # XDG-Ninja
 # =============================================================================
-
-# bash
-export HISTFILE="${XDG_STATE_HOME}/bash/history"
 
 # dotnet
 export DOTNET_CLI_HOME="${XDG_DATA_HOME}/dotnet"
 
 # nodejs
 export NODE_REPL_HISTORY="${XDG_DATA_HOME}/node_repl_history"
-
-# rbenv
-export RBENV_ROOT="${XDG_DATA_HOME}/rbenv"
 
 # Sqlite
 export SQLITE_HISTORY="${XDG_STATE_HOME}/sqlite/sqlite_history"
@@ -198,7 +200,6 @@ export XAUTHORITY="${XDG_RUNTIME_DIR}/Xauthority"
 
 # zsh
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
-
 
 # =============================================================================
 # Zoxide

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# Usage: n <source>
+
+set -euo pipefail
+
+IFS=$'\n\t'
+
+source="${1}"
+touch "${source}"
