@@ -36,6 +36,15 @@ fi
 # Main Packages
 # =============================================================================
 
+# bat
+if ! command -v bat &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install bat
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install bat -y
+  {{ end }}
+fi
+
 
 # Also see: .config/readline/inputrc
 
