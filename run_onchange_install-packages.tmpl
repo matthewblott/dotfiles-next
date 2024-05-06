@@ -453,3 +453,17 @@ fi
 
 # Install tpm plugins
 "${XDG_DATA_HOME}/tmux/plugins/tpm/bin/install_plugins"
+
+# =============================================================================
+# Neovim
+# =============================================================================
+
+if ! command -v nvim &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install nvim
+  {{ else if eq .chezmoi.os "linux" }}
+    echo 'nvim not installed'
+  {{ else }}
+    echo 'nvim not installed'
+  {{ end }}
+fi
