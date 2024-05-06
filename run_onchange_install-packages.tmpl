@@ -75,7 +75,7 @@ fi
 if ! command -v dust &> /dev/null; then
   {{ if eq .chezmoi.os "darwin" }}
     brew install dust
-  {{ else if eq .chezmoi.os "linux" }}
+  # {{ else if eq .chezmoi.os "linux" }}
     # deb-get
     # if ! command -v deb-get &> /dev/null; then
     #   curl -sL https://raw.githubusercontent.com/wimpysworld/deb-get/main/deb-get | sudo -E bash -s install deb-get
