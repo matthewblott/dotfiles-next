@@ -46,12 +46,12 @@ if ! command -v bat &> /dev/null; then
 fi
 
 # build-essential
-if ! command -v build-essential &> /dev/null; then
-  {{ if eq .chezmoi.os "darwin" }}
-  {{ else if eq .chezmoi.os "linux" }}
-    sudo apt install build-essential -y
-  {{ end }}
-fi
+# if ! command -v build-essential &> /dev/null; then
+#   {{ if eq .chezmoi.os "darwin" }}
+#   {{ else if eq .chezmoi.os "linux" }}
+#     sudo apt install build-essential -y
+#   {{ end }}
+# fi
 
 # cmake
 if ! command -v cmake &> /dev/null; then
