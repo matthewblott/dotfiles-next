@@ -198,7 +198,7 @@ fi
 
 # libyaml-dev
 {{ if eq .chezmoi.os "linux" }}
-  sudo apt install libffi-yaml
+  sudo apt install libyaml-dev
 {{ end }}
 
 # lsb-release
@@ -245,7 +245,7 @@ if ! command -v ruby-build &> /dev/null; then
   {{ if eq .chezmoi.os "darwin" }}
     brew install rbenv 
   {{ else if eq .chezmoi.os "linux" }}
-    sudo apt install ruby-build -y
+    git clone "https://github.com/rbenv/ruby-build.git" "$(rbenv root)/plugins/ruby-build"
   {{ else }}
     echo 'ruby-build not installed'
   {{ end }}
