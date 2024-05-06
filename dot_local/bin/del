@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+# Usage: del <source>
+
+# Exit immediately if a command exits with a non-zero status
+set -euo pipefail
+
+IFS=$'\n\t'
+
+debug=true
+
+_trash() {
+
+  local source="${1}"
+
+  base_name=$(basename "${source}")
+
+  target=~/.Trash/${base_name}
+
+  file_exists=false
+
+  if test -f "${target}"; then
+    file_exists=true
+  fi
+
+  dir_exists=false
+
+  if test -d "${target}"; then
+    dir_exists=true 
+  fi
+
+  if test ${file_exists} == false && test ${dir_exists} == false; then
+    mv "${source}" "${target}"
+    return 0
+  fi
+
+  target_suffix=$(date +'%Y-%m-%d %H-%M-%S')
+
+  # this can also applied if the source is a file
+  if test ${dir_exists} == true; then
+    target="${target} ${target_suffix}" 
+    mv "${source}" "${target}"
+    return 0
+  fi
+
+  file_ext="${base_name##*.}"
+  file_name="${base_name%.*}"
+
+  target=~/.Trash/"${file_name} ${target_suffix}.${file_ext}"
+
+  mv "${source}" "${target}"
+  return 0
+
+}
+
+args=("$@")
+
+for var in "${args[@]}"
+do
+  _trash "${var}"
+done
