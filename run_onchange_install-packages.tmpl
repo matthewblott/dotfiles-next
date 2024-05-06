@@ -191,14 +191,22 @@ if ! command -v lf &> /dev/null; then
   {{ end }}
 fi
 
+# Requirement for using rbenv
 # libffi-dev
 {{ if eq .chezmoi.os "linux" }}
-  sudo apt install libffi-dev
+  sudo apt install libffi-dev -y
 {{ end }}
 
+# Requirement for using rbenv
 # libyaml-dev
 {{ if eq .chezmoi.os "linux" }}
-  sudo apt install libyaml-dev
+  sudo apt install libyaml-dev -y
+{{ end }}
+
+# Requirement for using rbenv
+# libzip-dev
+{{ if eq .chezmoi.os "linux" }}
+  sudo apt install libzip-dev -y
 {{ end }}
 
 # lsb-release
@@ -218,6 +226,7 @@ if ! command -v neofetch &> /dev/null; then
     echo 'neofetch not installed'
   {{ end }}
 fi
+
 
 # ninja-build
 if ! command -v ninja-build &> /dev/null; then
