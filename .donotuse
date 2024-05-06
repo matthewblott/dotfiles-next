@@ -1,0 +1,403 @@
+#!/usr/bin/env bash
+# vim: filetype=bash
+
+source "${HOME}/.bashrc"
+
+# =============================================================================
+# Homebrew
+# =============================================================================
+
+# Install homebrew if it's not installed
+
+{{ if eq .chezmoi.os "darwin" }}
+
+if ! command -v brew &> /dev/null; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# homebrew completions
+if type brew &>/dev/null; then
+  HOMEBREW_PREFIX="$(brew --prefix)"
+  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
+    source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+  else
+    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*
+    do
+      [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
+    done
+  fi
+fi
+
+{{ end }}
+
+# =============================================================================
+# Main Packages
+# =============================================================================
+
+# bat
+if ! command -v bat &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install bat
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install bat -y
+  {{ end }}
+fi
+
+# build-essential
+# if ! command -v build-essential &> /dev/null; then
+#   {{ if eq .chezmoi.os "darwin" }}
+#   {{ else if eq .chezmoi.os "linux" }}
+#     sudo apt install build-essential -y
+#   {{ end }}
+# fi
+
+# cmake
+if ! command -v cmake &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install cmake
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install cmake -y
+  {{ end }}
+fi
+
+# curl
+if ! command -v curl &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install curl
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install curl -y
+  {{ end }}
+fi
+
+# dust
+if ! command -v dust &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install dust
+  # {{ else if eq .chezmoi.os "linux" }}
+    # deb-get
+    # if ! command -v deb-get &> /dev/null; then
+    #   curl -sL https://raw.githubusercontent.com/wimpysworld/deb-get/main/deb-get | sudo -E bash -s install deb-get
+    # fi
+    # dust
+    # does not work on Linux arm
+    # if ! command -v dust &> /dev/null; then
+    #   deb-get install du-dust
+    # fi
+  {{ end }}
+fi
+
+# exa
+if ! command -v exa &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    # exa has been disabled because it is not maintained upstream!
+    # brew install exa
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install exa -y
+  {{ end }}
+fi
+
+# fzf
+if ! command -v fzf &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install fzf
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install fzf -y
+  {{ end }}
+fi
+
+# gettext
+if ! command -v gettext &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install gettext
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install gettext -y
+  {{ end }}
+fi
+
+# gh
+if ! command -v gh &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install gh
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install gh -y
+  {{ end }}
+fi
+
+# git autocompletions
+# curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
+# chmod +x ~/.git-completion.bash
+# if [ -f ~/.git-completion.bash ]; then
+#   source ~/.git-completion.bash
+# fi
+
+# httpie
+if ! command -v httpie &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install httpie
+  {{ else if eq .chezmoi.os "linux" }}
+    # python -m pip install --upgrade pip wheel
+    # python -m pip install httpie
+  {{ end }}
+fi
+
+# jq
+if ! command -v jq &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install jq
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install jq -y
+  {{ end }}
+fi
+
+# kitty
+if ! command -v kitty; then
+  # Kitty is stored in the main macOS root Applications folder so /dev/null doesn't apply.
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install kitty
+  {{ else if eq .chezmoi.os "linux" }}
+    # curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+  {{ end }}
+fi
+
+# lf
+if ! command -v lf &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install lf 
+  {{ else if eq .chezmoi.os "linux" }}
+    # No package for linux arm, need to install with go
+  {{ end }}
+fi
+
+# lsb-release
+{{ if eq .chezmoi.os "linux" }}
+  if ! command -v lsb-release &> /dev/null; then
+    sudo apt install lsb-release -y
+  fi
+{{ end }}
+
+# neofetch
+if ! command -v neofetch &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install neofetch
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install neofetch -y
+  {{ end }}
+fi
+
+# ninja-build
+if ! command -v ninja-build &> /dev/null; then
+  {{ if eq .chezmoi.os "linux" }}
+    sudo apt install ninja-build -y
+  {{ end }}
+fi
+
+# rclone
+if ! command -v rclone &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install rclone
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install rclone -y
+  {{ end }}
+fi
+
+# ripgrep
+if ! command -v ripgrep >/dev/null 2>&1; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install ripgrep
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install ripgrep -y
+  {{ end }}
+fi
+
+# Starship
+if ! command -v starship >/dev/null 2>&1; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install starship
+  {{ end }}
+fi
+
+# tgpt
+if ! command -v tgpt &> /dev/null; then
+  curl -sSL https://raw.githubusercontent.com/aandrew-me/tgpt/main/install | bash -s /usr/local/bin
+fi
+
+# tldr
+if ! command -v tldr &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install tldr
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install tldr -y
+  {{ end }}
+fi
+
+# tmux
+if ! command -v tmux >/dev/null 2>&1; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install tmux
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install tmux -y
+  {{ end }}
+fi
+
+# trash
+if ! command -v trash >/dev/null 2>&1; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install trash-cli
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install trash-cli -y
+  {{ end }}
+fi
+
+# tree
+if ! command -v tree >/dev/null 2>&1; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install tree
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install tree -y
+  {{ end }}
+fi
+
+# unzip
+if ! command -v unzip &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install unzip
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install unzip -y
+  {{ end }}
+fi
+
+# visidata
+if ! command -v vd &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install saulpw/vd/visidata
+  {{ else if eq .chezmoi.os "linux" }}
+    # pip3 install visidata
+  {{ end }}
+fi
+
+# wget
+if ! command -v wget &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install wget
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install wget -y
+  {{ end }}
+fi
+
+# xdg-ninja
+if ! command -v xdg-ninja &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install xdg-ninja
+  {{ else if eq .chezmoi.os "linux" }}
+    # Clone the repository somewhere, then run the ./xdg-ninja.sh script.
+  {{ end }}
+fi
+
+# xclip
+{{ if eq .chezmoi.os "linux" }}
+  if ! command -v xclip &> /dev/null; then
+    sudo apt install xclip -y
+  fi
+{{ end }}
+
+# zip
+if ! command -v zip &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install zip
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install zip -y
+  {{ end }}
+fi
+
+# zoxide
+if ! command -v zoxide &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install zoxide
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install zoxide -y
+  {{ end }}
+fi
+
+# Also see: .config/readline/inputrc
+
+
+# =============================================================================
+# NVM
+# =============================================================================
+
+if ! command -v nvm >/dev/null 2>&1; then
+  mkdir -p "${NVM_DIR}"
+  PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash'
+fi
+
+# Install the latest LTS version if it doesn't exist
+if ! command -v node >/dev/null 2>&1; then
+  # Filter to get the latest LTS version
+  lts_version=$(nvm ls-remote --lts | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' | tail -n 1)
+  nvm install "${lts_version}"
+fi
+
+# =============================================================================
+# PNPM Packages
+# =============================================================================
+
+# First install pnpm with npm because it's already installed with nvm
+if ! command -v pnpm >/dev/null 2>&1; then
+  npm install -g pnpm
+fi
+
+# if ! command -v x >/dev/null 2>&1; then
+#   npm install -g x
+# fi
+
+if ! command -v browser-sync >/dev/null 2>&1; then
+  pnpm install -g browser-sync
+fi
+
+# Spellchecker for code
+if ! command -v cspell >/dev/null 2>&1; then
+  pnpm install -g cspell 
+fi
+
+# Scaffolder sometimes used by third parties
+if ! command -v degit >/dev/null 2>&1; then
+  pnpm install -g degit
+fi
+
+if ! command -v faker-cli >/dev/null 2>&1; then
+  pnpm install -g faker-cli
+fi
+
+if ! command -v http-server >/dev/null 2>&1; then
+  pnpm install -g http-server
+fi
+
+# Perl REPL
+if ! command -v perli >/dev/null 2>&1; then
+  pnpm install -g perli
+fi
+
+# The better-sqlite3 library installation causes a crash, needs investigation
+# Convert sqlite tables to json
+# if ! command -v sqlite-json >/dev/null 2>&1; then
+#   pnpm install -g sqlite-json
+# fi
+
+# Install yarn in case it's required by thrid parties
+if ! command -v yarn >/dev/null 2>&1; then
+  pnpm install -g yarn
+fi
+
+# =============================================================================
+# tmux
+# =============================================================================
+
+mkdir -p "${XDG_DATA_HOME}/tmux/plugins"
+
+# Install Tmux Plugin Manager
+git clone "https://github.com/tmux-plugins/tpm" "${XDG_DATA_HOME}/tmux/plugins/tpm"
+
+# Install tpm plugins
+"${XDG_DATA_HOME}/tmux/plugins/tpm/bin/install_plugins"
