@@ -72,9 +72,9 @@ if ! command -v curl &> /dev/null; then
 fi
 
 # dust
-if ! command -v dust &> /dev/null; then
-  {{ if eq .chezmoi.os "darwin" }}
-    brew install dust
+# if ! command -v dust &> /dev/null; then
+#   {{ if eq .chezmoi.os "darwin" }}
+#     brew install dust
   # {{ else if eq .chezmoi.os "linux" }}
     # deb-get
     # if ! command -v deb-get &> /dev/null; then
@@ -85,8 +85,8 @@ if ! command -v dust &> /dev/null; then
     # if ! command -v dust &> /dev/null; then
     #   deb-get install du-dust
     # fi
-  {{ end }}
-fi
+#   {{ end }}
+# fi
 
 # exa
 if ! command -v exa &> /dev/null; then
