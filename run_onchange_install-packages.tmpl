@@ -162,7 +162,7 @@ if ! command -v httpie &> /dev/null; then
     # python -m pip install --upgrade pip wheel
     # python -m pip install httpie
   {{ else }}
-    echo ' not installed'
+    echo 'httpie not installed'
   {{ end }}
 fi
 
@@ -173,7 +173,7 @@ if ! command -v jq &> /dev/null; then
   {{ else if eq .chezmoi.os "linux" }}
     sudo apt install jq -y
   {{ else }}
-    echo ' not installed'
+    echo 'jq not installed'
   {{ end }}
 fi
 
@@ -186,7 +186,7 @@ if ! command -v kitty; then
     echo ' not installed'
     # curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
   {{ else }}
-    echo ' not installed'
+    echo 'kitty not installed'
   {{ end }}
 fi
 
@@ -196,9 +196,9 @@ if ! command -v lf &> /dev/null; then
     brew install lf 
   {{ else if eq .chezmoi.os "linux" }}
     # No package for linux arm, need to install with go
-    echo ' not installed'
+    echo 'lf not installed'
   {{ else }}
-    echo ' not installed'
+    echo 'lf not installed'
   {{ end }}
 fi
 
@@ -216,7 +216,7 @@ if ! command -v neofetch &> /dev/null; then
   {{ else if eq .chezmoi.os "linux" }}
     sudo apt install neofetch -y
   {{ else }}
-    echo ' not installed'
+    echo 'neofetch not installed'
   {{ end }}
 fi
 
@@ -225,7 +225,7 @@ if ! command -v ninja-build &> /dev/null; then
   {{ if eq .chezmoi.os "linux" }}
     sudo apt install ninja-build -y
   {{ else }}
-    echo ' not installed'
+    echo 'ninja-build not installed'
   {{ end }}
 fi
 
@@ -236,7 +236,7 @@ if ! command -v rclone &> /dev/null; then
   {{ else if eq .chezmoi.os "linux" }}
     sudo apt install rclone -y
   {{ else }}
-    echo ' not installed'
+    echo 'rclone not installed'
   {{ end }}
 fi
 
@@ -247,7 +247,7 @@ if ! command -v ripgrep >/dev/null 2>&1; then
   {{ else if eq .chezmoi.os "linux" }}
     sudo apt install ripgrep -y
   {{ else }}
-    echo ' not installed'
+    echo 'ripgrep not installed'
   {{ end }}
 fi
 
@@ -256,7 +256,7 @@ if ! command -v starship >/dev/null 2>&1; then
   {{ if eq .chezmoi.os "darwin" }}
     brew install starship
   {{ else }}
-    echo ' not installed'
+    echo 'starship not installed'
   {{ end }}
 fi
 
@@ -272,7 +272,7 @@ if ! command -v tldr &> /dev/null; then
   {{ else if eq .chezmoi.os "linux" }}
     sudo apt install tldr -y
   {{ else }}
-    echo ' not installed'
+    echo 'tlrd not installed'
   {{ end }}
 fi
 
@@ -283,7 +283,7 @@ if ! command -v tmux >/dev/null 2>&1; then
   {{ else if eq .chezmoi.os "linux" }}
     sudo apt install tmux -y
   {{ else }}
-    echo ' not installed'
+    echo 'tmux not installed'
   {{ end }}
 fi
 
@@ -294,7 +294,7 @@ if ! command -v trash >/dev/null 2>&1; then
   {{ else if eq .chezmoi.os "linux" }}
     sudo apt install trash-cli -y
   {{ else }}
-    echo ' not installed'
+    echo 'trash not installed'
   {{ end }}
 fi
 
@@ -305,7 +305,7 @@ if ! command -v tree >/dev/null 2>&1; then
   {{ else if eq .chezmoi.os "linux" }}
     sudo apt install tree -y
   {{ else }}
-    echo ' not installed'
+    echo 'tree not installed'
   {{ end }}
 fi
 
@@ -316,7 +316,7 @@ if ! command -v unzip &> /dev/null; then
   {{ else if eq .chezmoi.os "linux" }}
     sudo apt install unzip -y
   {{ else }}
-    echo ' not installed'
+    echo 'unzip not installed'
   {{ end }}
 fi
 
@@ -325,10 +325,10 @@ if ! command -v vd &> /dev/null; then
   {{ if eq .chezmoi.os "darwin" }}
     brew install saulpw/vd/visidata
   {{ else if eq .chezmoi.os "linux" }}
-    echo ' not installed'
+    echo 'visidata not installed'
     # pip3 install visidata
   {{ else }}
-    echo ' not installed'
+    echo 'visidata not installed'
   {{ end }}
 fi
 
@@ -339,7 +339,7 @@ if ! command -v wget &> /dev/null; then
   {{ else if eq .chezmoi.os "linux" }}
     sudo apt install wget -y
   {{ else }}
-    echo ' not installed'
+    echo 'wget not installed'
   {{ end }}
 fi
 
@@ -348,10 +348,10 @@ if ! command -v xdg-ninja &> /dev/null; then
   {{ if eq .chezmoi.os "darwin" }}
     brew install xdg-ninja
   {{ else if eq .chezmoi.os "linux" }}
-    echo ' not installed'
+    echo 'xdg-ninja not installed'
     # Clone the repository somewhere, then run the ./xdg-ninja.sh script.
   {{ else }}
-    echo ' not installed'
+    echo 'xdg-ninja not installed'
   {{ end }}
 fi
 
@@ -369,7 +369,7 @@ if ! command -v zip &> /dev/null; then
   {{ else if eq .chezmoi.os "linux" }}
     sudo apt install zip -y
   {{ else }}
-    echo ' not installed'
+    echo 'zip not installed'
   {{ end }}
 fi
 
@@ -380,7 +380,7 @@ if ! command -v zoxide &> /dev/null; then
   {{ else if eq .chezmoi.os "linux" }}
     sudo apt install zoxide -y
   {{ else }}
-    echo ' not installed'
+    echo 'zoxide not installed'
   {{ end }}
 fi
 
@@ -410,10 +410,6 @@ fi
 if ! command -v pnpm >/dev/null 2>&1; then
   npm install -g pnpm
 fi
-
-# if ! command -v x >/dev/null 2>&1; then
-#   npm install -g x
-# fi
 
 if ! command -v browser-sync >/dev/null 2>&1; then
   pnpm install -g browser-sync
@@ -457,10 +453,14 @@ fi
 # tmux
 # =============================================================================
 
-mkdir -p "${XDG_DATA_HOME}/tmux/plugins"
+if [ -d "${XDG_DATA_HOME}/tmux/plugins" ] ; then
+  mkdir -p "${XDG_DATA_HOME}/tmux/plugins"
+fi
 
 # Install Tmux Plugin Manager
-git clone "https://github.com/tmux-plugins/tpm" "${XDG_DATA_HOME}/tmux/plugins/tpm"
+if [ -d "${XDG_DATA_HOME}/tmux/plugins/tpm" ] ; then
+  git clone "https://github.com/tmux-plugins/tpm" "${XDG_DATA_HOME}/tmux/plugins/tpm"
+fi
 
 # Install tpm plugins
 "${XDG_DATA_HOME}/tmux/plugins/tpm/bin/install_plugins"
