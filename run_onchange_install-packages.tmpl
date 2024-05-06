@@ -191,6 +191,16 @@ if ! command -v lf &> /dev/null; then
   {{ end }}
 fi
 
+# libffi-dev
+{{ if eq .chezmoi.os "linux" }}
+  sudo apt install libffi-dev
+{{ end }}
+
+# libyaml-dev
+{{ if eq .chezmoi.os "linux" }}
+  sudo apt install libffi-yaml
+{{ end }}
+
 # lsb-release
 {{ if eq .chezmoi.os "linux" }}
   if ! command -v lsb-release &> /dev/null; then
@@ -224,8 +234,8 @@ if ! command -v rbenv &> /dev/null; then
     brew install rbenv 
     brew install ruby-build
   {{ else if eq .chezmoi.os "linux" }}
-    git clone "https://github.com/rbenv/rbenv.git" "${XDG_DATA_HOME}/rbenv"
-    "${XDG_DATA_HOME}/rbenv" init
+    git clone "https://github.com/rbenv/rbenv.git" "${RBENV_ROOT}"
+    "${RBENV_ROOT}/bin/rbenv" init
   {{ else }}
     echo 'rbenv not installed'
   {{ end }}
@@ -496,3 +506,4 @@ if ! command -v nvim &> /dev/null; then
     echo 'neovim not installed'
   {{ end }}
 fi
+
