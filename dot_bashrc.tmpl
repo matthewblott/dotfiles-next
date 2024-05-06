@@ -193,7 +193,7 @@ esac
 
 export RBENV_ROOT="${XDG_DATA_HOME}/rbenv"
 
-if which rbenv >/dev/null 2>&1; then
+if [ -f "${RBENV_ROOT}/bin/rbenv" ] ; then
   eval "$(${RBENV_ROOT}/bin/rbenv init - bash)"
 fi
 
