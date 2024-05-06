@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 # vim: filetype=bash
 
-source "${HOME}/.bashrc"
-
 # =============================================================================
 # Homebrew
 # =============================================================================
@@ -15,22 +13,13 @@ if ! command -v brew &> /dev/null; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
-# homebrew completions
-if type brew &>/dev/null; then
-  HOMEBREW_PREFIX="$(brew --prefix)"
-  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
-    source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
-  else
-    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*
-    do
-      [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
-    done
-  fi
-fi
-
 {{ end }}
+
+# =============================================================================
+# Source bashrc 
+# =============================================================================
+
+source "${HOME}/.bashrc"
 
 # =============================================================================
 # Main Packages
@@ -183,8 +172,8 @@ if ! command -v kitty; then
   {{ if eq .chezmoi.os "darwin" }}
     brew install kitty
   {{ else if eq .chezmoi.os "linux" }}
-    echo ' not installed'
     # curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+    echo ' not installed'
   {{ else }}
     echo 'kitty not installed'
   {{ end }}
@@ -348,8 +337,8 @@ if ! command -v xdg-ninja &> /dev/null; then
   {{ if eq .chezmoi.os "darwin" }}
     brew install xdg-ninja
   {{ else if eq .chezmoi.os "linux" }}
-    echo 'xdg-ninja not installed'
     # Clone the repository somewhere, then run the ./xdg-ninja.sh script.
+    echo 'xdg-ninja not installed'
   {{ else }}
     echo 'xdg-ninja not installed'
   {{ end }}
