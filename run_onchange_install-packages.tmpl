@@ -79,25 +79,26 @@ if ! command -v curl &> /dev/null; then
 fi
 
 # dust
-if ! command -v dust &> /dev/null; then
+# if ! command -v dust &> /dev/null; then
   {{ if eq .chezmoi.os "darwin" }}
-    brew install dust
-  # {{ else if eq .chezmoi.os "linux" }}
-    # deb-get
-    # if ! command -v deb-get &> /dev/null; then
-    #   curl -sL https://raw.githubusercontent.com/wimpysworld/deb-get/main/deb-get | sudo -E bash -s install deb-get
-    # fi
-    # dust
-    # does not work on Linux arm
-    # if ! command -v dust &> /dev/null; then
-    #   deb-get install du-dust
-    # fi
+    echo ' not installed'
+#     brew install dust
+#   # {{ else if eq .chezmoi.os "linux" }}
+#     # deb-get
+#     # if ! command -v deb-get &> /dev/null; then
+#     #   curl -sL https://raw.githubusercontent.com/wimpysworld/deb-get/main/deb-get | sudo -E bash -s install deb-get
+#     # fi
+#     # dust
+#     # does not work on Linux arm
+#     # if ! command -v dust &> /dev/null; then
+#     #   deb-get install du-dust
+#     # fi
   {{ else }}
     echo ' not installed'
   {{ end }}
-else
-  echo 'dust already installed'
-fi
+# else
+#   echo 'dust already installed'
+# fi
 
 # exa
 if ! command -v exa &> /dev/null; then
@@ -157,6 +158,7 @@ if ! command -v httpie &> /dev/null; then
   {{ if eq .chezmoi.os "darwin" }}
     brew install httpie
   {{ else if eq .chezmoi.os "linux" }}
+    echo ' not installed'
     # python -m pip install --upgrade pip wheel
     # python -m pip install httpie
   {{ else }}
