@@ -245,7 +245,7 @@ if ! command -v ruby-build &> /dev/null; then
   {{ if eq .chezmoi.os "darwin" }}
     brew install rbenv 
   {{ else if eq .chezmoi.os "linux" }}
-    git clone "https://github.com/rbenv/ruby-build.git" "$(rbenv root)/plugins/ruby-build"
+    git clone "https://github.com/rbenv/ruby-build.git" "${RBENV_ROOT}/plugins/ruby-build"
   {{ else }}
     echo 'ruby-build not installed'
   {{ end }}
