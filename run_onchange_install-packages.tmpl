@@ -42,16 +42,18 @@ if ! command -v bat &> /dev/null; then
     brew install bat
   {{ else if eq .chezmoi.os "linux" }}
     sudo apt install bat -y
+  {{ else }}
+    echo 'bat not installed'
   {{ end }}
 fi
 
 # build-essential
 if ! command -v build-essential &> /dev/null; then
-  echo 'foo'
-  # {{ if eq .chezmoi.os "darwin" }}
-  # {{ else if eq .chezmoi.os "linux" }}
-  #   sudo apt install build-essential -y
-  # {{ end }}
+  {{ if eq .chezmoi.os "linux" }}
+    sudo apt install build-essential -y
+  {{ else }}
+    echo 'build-essential not installed'
+  {{ end }}
 fi
 
 
