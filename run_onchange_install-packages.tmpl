@@ -47,8 +47,7 @@ fi
 
 # build-essential
 if ! command -v build-essential &> /dev/null; then
-  {{ if eq .chezmoi.os "darwin" }}
-  {{ else if eq .chezmoi.os "linux" }}
+  {{ if eq .chezmoi.os "linux" }}
     sudo apt install build-essential -y
   {{ end }}
 fi
@@ -290,7 +289,7 @@ fi
 if ! command -v xdg-ninja &> /dev/null; then
   {{ if eq .chezmoi.os "darwin" }}
     brew install xdg-ninja
-  {{ else if eq .chezmoi.os "linux" }}
+  # {{ else if eq .chezmoi.os "linux" }}
     # Clone the repository somewhere, then run the ./xdg-ninja.sh script.
   {{ end }}
 fi
