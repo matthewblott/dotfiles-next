@@ -218,6 +218,19 @@ if ! command -v ninja-build &> /dev/null; then
   {{ end }}
 fi
 
+# rbenv
+if ! command -v rbenv &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install rbenv 
+    brew install ruby-build
+  {{ else if eq .chezmoi.os "linux" }}
+    git clone "https://github.com/rbenv/rbenv.git" "${XDG_DATA_HOME}/rbenv"
+    "${XDG_DATA_HOME}/rbenv" init
+  {{ else }}
+    echo 'rbenv not installed'
+  {{ end }}
+fi
+
 # rclone
 if ! command -v rclone &> /dev/null; then
   {{ if eq .chezmoi.os "darwin" }}
