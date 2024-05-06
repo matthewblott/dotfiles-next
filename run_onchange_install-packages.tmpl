@@ -112,15 +112,15 @@ if ! command -v fzf &> /dev/null; then
 fi
 
 # gettext
-if ! command -v gettext &> /dev/null; then
-  {{ if eq .chezmoi.os "darwin" }}
+{{ if eq .chezmoi.os "darwin" }}
+  if ! command -v gettext &> /dev/null; then
     brew install gettext
-  {{ else if eq .chezmoi.os "linux" }}
-    sudo apt install gettext -y
-  {{ else }}
-    echo ' not installed'
-  {{ end }}
-fi
+  fi
+{{ else if eq .chezmoi.os "linux" }}
+  # appears like a newer version needs to be installed 
+  sudo apt install gettext -y
+{{ end }}
+
 
 # gh
 if ! command -v gh &> /dev/null; then
@@ -472,11 +472,11 @@ if ! command -v nvim &> /dev/null; then
 
     git checkout stable
 
-    sudo make CMAKE_BUILD_TYPE=RelWithDebInfo
+    make CMAKE_BUILD_TYPE=RelWithDebInfo
     sudo make install
 
     if [ -d "${HOME}/neovim" ] ; then
-      rm -rf "${HOME}/neovim"
+      sudo rm -rf "${HOME}/neovim"
     fi
 
   {{ else }}
