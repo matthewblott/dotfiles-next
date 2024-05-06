@@ -45,6 +45,14 @@ if ! command -v bat &> /dev/null; then
   {{ end }}
 fi
 
+# build-essential
+if ! command -v build-essential &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install build-essential -y
+  {{ end }}
+fi
+
 
 # Also see: .config/readline/inputrc
 
