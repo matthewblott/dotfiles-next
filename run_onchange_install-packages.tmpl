@@ -379,11 +379,12 @@ fi
 # NVM
 # =============================================================================
 
-if ! command -v nvm >/dev/null 2>&1; then
+if [ ! -d "${NVM_DIR}" ] ; then
+  mkdir -p "${NVM_DIR}"
+fi
 
-mkdir -p "${NVM_DIR}"
-PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash'
-
+if [ ! -d "${NVM_DIR}/.git" ] ; then
+  PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash'
 fi
 
 # Install the latest LTS version if it doesn't exist
