@@ -56,6 +56,325 @@ if ! command -v build-essential &> /dev/null; then
   {{ end }}
 fi
 
+# cmake
+if ! command -v cmake &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install cmake
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install cmake -y
+  {{ end }}
+fi
+
+# curl
+if ! command -v curl &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install curl
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install curl -y
+  {{ end }}
+fi
+
+# dust
+if ! command -v dust &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install dust
+  # {{ else if eq .chezmoi.os "linux" }}
+    # deb-get
+    # if ! command -v deb-get &> /dev/null; then
+    #   curl -sL https://raw.githubusercontent.com/wimpysworld/deb-get/main/deb-get | sudo -E bash -s install deb-get
+    # fi
+    # dust
+    # does not work on Linux arm
+    # if ! command -v dust &> /dev/null; then
+    #   deb-get install du-dust
+    # fi
+  {{ end }}
+else
+  echo 'dust already installed'
+fi
+
+# exa
+if ! command -v exa &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    echo 'exa not installed'
+    # exa has been disabled because it is not maintained upstream!
+    # brew install exa
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install exa -y
+  {{ else }}
+    echo ' not installed'
+  {{ end }}
+fi
+
+# fzf
+if ! command -v fzf &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install fzf
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install fzf -y
+  {{ else }}
+    echo ' not installed'
+  {{ end }}
+fi
+
+# gettext
+if ! command -v gettext &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install gettext
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install gettext -y
+  {{ else }}
+    echo ' not installed'
+  {{ end }}
+fi
+
+# gh
+if ! command -v gh &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install gh
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install gh -y
+  {{ else }}
+    echo ' not installed'
+  {{ end }}
+fi
+
+# git autocompletions
+# curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
+# chmod +x ~/.git-completion.bash
+# if [ -f ~/.git-completion.bash ]; then
+#   source ~/.git-completion.bash
+# fi
+
+# httpie
+if ! command -v httpie &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install httpie
+  {{ else if eq .chezmoi.os "linux" }}
+    # python -m pip install --upgrade pip wheel
+    # python -m pip install httpie
+  {{ else }}
+    echo ' not installed'
+  {{ end }}
+fi
+
+# jq
+if ! command -v jq &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install jq
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install jq -y
+  {{ else }}
+    echo ' not installed'
+  {{ end }}
+fi
+
+# kitty
+if ! command -v kitty; then
+  # Kitty is stored in the main macOS root Applications folder so /dev/null doesn't apply.
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install kitty
+  {{ else if eq .chezmoi.os "linux" }}
+    # curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+  {{ end }}
+fi
+
+# lf
+if ! command -v lf &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install lf 
+  {{ else if eq .chezmoi.os "linux" }}
+    # No package for linux arm, need to install with go
+  {{ else }}
+    echo ' not installed'
+  {{ end }}
+fi
+
+# lsb-release
+{{ if eq .chezmoi.os "linux" }}
+  if ! command -v lsb-release &> /dev/null; then
+    sudo apt install lsb-release -y
+  else
+    echo 'lsb-release already installed'
+  fi
+{{ end }}
+
+# neofetch
+if ! command -v neofetch &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install neofetch
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install neofetch -y
+  {{ else }}
+    echo ' not installed'
+  {{ end }}
+fi
+
+# ninja-build
+if ! command -v ninja-build &> /dev/null; then
+  {{ if eq .chezmoi.os "linux" }}
+    sudo apt install ninja-build -y
+  {{ else }}
+    echo ' not installed'
+  {{ end }}
+fi
+
+# rclone
+if ! command -v rclone &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install rclone
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install rclone -y
+  {{ else }}
+    echo ' not installed'
+  {{ end }}
+fi
+
+# ripgrep
+if ! command -v ripgrep >/dev/null 2>&1; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install ripgrep
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install ripgrep -y
+  {{ else }}
+    echo ' not installed'
+  {{ end }}
+fi
+
+# Starship
+if ! command -v starship >/dev/null 2>&1; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install starship
+  {{ end }}
+fi
+
+# tgpt
+if ! command -v tgpt &> /dev/null; then
+  curl -sSL https://raw.githubusercontent.com/aandrew-me/tgpt/main/install | bash -s /usr/local/bin
+else
+  echo 'tgpt already installed'
+fi
+
+# tldr
+if ! command -v tldr &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install tldr
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install tldr -y
+  {{ else }}
+    echo ' not installed'
+  {{ end }}
+fi
+
+# tmux
+if ! command -v tmux >/dev/null 2>&1; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install tmux
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install tmux -y
+  {{ else }}
+    echo ' not installed'
+  {{ end }}
+fi
+
+# trash
+if ! command -v trash >/dev/null 2>&1; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install trash-cli
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install trash-cli -y
+  {{ else }}
+    echo ' not installed'
+  {{ end }}
+fi
+
+# tree
+if ! command -v tree >/dev/null 2>&1; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install tree
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install tree -y
+  {{ else }}
+    echo ' not installed'
+  {{ end }}
+fi
+
+# unzip
+if ! command -v unzip &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install unzip
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install unzip -y
+  {{ else }}
+    echo ' not installed'
+  {{ end }}
+fi
+
+# visidata
+if ! command -v vd &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install saulpw/vd/visidata
+  {{ else if eq .chezmoi.os "linux" }}
+    echo ' not installed'
+    # pip3 install visidata
+  {{ else }}
+    echo ' not installed'
+  {{ end }}
+fi
+
+# wget
+if ! command -v wget &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install wget
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install wget -y
+  {{ else }}
+    echo ' not installed'
+  {{ end }}
+fi
+
+# xdg-ninja
+if ! command -v xdg-ninja &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install xdg-ninja
+  {{ else if eq .chezmoi.os "linux" }}
+    echo ' not installed'
+    # Clone the repository somewhere, then run the ./xdg-ninja.sh script.
+  {{ else }}
+    echo ' not installed'
+  {{ end }}
+fi
+
+# xclip
+{{ if eq .chezmoi.os "linux" }}
+  if ! command -v xclip &> /dev/null; then
+    sudo apt install xclip -y
+  else
+    echo 'xclip already installed'
+  fi
+{{ end }}
+
+# zip
+if ! command -v zip &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install zip
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install zip -y
+  {{ else }}
+    echo ' not installed'
+  {{ end }}
+fi
+
+# zoxide
+if ! command -v zoxide &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install zoxide
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install zoxide -y
+  {{ else }}
+    echo ' not installed'
+  {{ end }}
+fi
 
 # Also see: .config/readline/inputrc
 
