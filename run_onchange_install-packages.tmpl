@@ -453,12 +453,12 @@ fi
 # tmux
 # =============================================================================
 
-if [ -d "${XDG_DATA_HOME}/tmux/plugins" ] ; then
+if [ ! -d "${XDG_DATA_HOME}/tmux/plugins" ] ; then
   mkdir -p "${XDG_DATA_HOME}/tmux/plugins"
 fi
 
 # Install Tmux Plugin Manager
-if [ -d "${XDG_DATA_HOME}/tmux/plugins/tpm" ] ; then
+if [ ! -d "${XDG_DATA_HOME}/tmux/plugins/tpm" ] ; then
   git clone "https://github.com/tmux-plugins/tpm" "${XDG_DATA_HOME}/tmux/plugins/tpm"
 fi
 
