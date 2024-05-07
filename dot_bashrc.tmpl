@@ -60,7 +60,9 @@ fi
 
 # Bash Vim Settings
 # Use vim commands with the terminal, will need to set an alternative file
-# set -o vi
+# Check the settings in .config/readline/inputrc
+set -o vi
+bind '"kj": vi-movement-mode'
 
 if which nvim >/dev/null 2>&1; then
   export EDITOR=nvim
@@ -270,6 +272,13 @@ alias chat='tgpt'
 # =============================================================================
 
 alias tree='tree -C'
+
+# =============================================================================
+# VisiData
+# =============================================================================
+
+# Prevents prompting when saving with `vd`
+alias vd='vd --overwrite=y'
 
 # =============================================================================
 # W3m
