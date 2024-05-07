@@ -88,7 +88,7 @@ fi
 # fi
 
 # eza
-if ! command -v exa &> /dev/null; then
+if ! command -v eza &> /dev/null; then
   {{ if eq .chezmoi.os "darwin" }}
     brew install eza
   {{ else if eq .chezmoi.os "linux" }}
