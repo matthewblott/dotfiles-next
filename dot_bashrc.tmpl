@@ -101,10 +101,39 @@ fi
 alias cl='clear'
 
 # =============================================================================
+# Copy
+# =============================================================================
+
+{{ if eq .chezmoi.os "darwin" -}}
+  alias copy="tr -d '\n' | pbcopy"
+{{- end }}
+
+# =============================================================================
 # Dotnet 
 # =============================================================================
 
 export DOTNET_CLI_HOME="${XDG_DATA_HOME}/dotnet"
+
+# =============================================================================
+# Eza
+# =============================================================================
+
+if which eza >/dev/null 2>&1; then
+  alias _ls='EZA_COLORS="da=48;5;232;38;5;195:di=36" \
+    eza \
+      --created \
+      --modified \
+      --group \
+      --group-directories-first \
+      --header \
+      --icons \
+      --long \
+      --time-style=long-iso \
+      --sort=extension \
+      --color=always'
+  alias ll='_ls'
+  alias la='_ls --all'
+fi
 
 # =============================================================================
 # Git
@@ -121,12 +150,30 @@ fi
 alias grep='grep --color=auto'
 
 # =============================================================================
+# Less
+# =============================================================================
+
+export LESSHISTFILE="${XDG_STATE_HOME}/less/history"
+
+if [ -d "${LESSHISTFILE}" ] ; then
+  mkdir -p "${LESSHISTFILE}"
+fi
+
+if [ -f "${HOME}/.lesshst" ] ; then
+  mv "${HOME}/.lesshst" "${LESSHISTFILE}/history"
+fi
+
+# =============================================================================
 # Ls
 # =============================================================================
 
 alias ls='ls --color=auto'
-alias ll='ls -l --color=auto'
-alias la='ls -la --color=auto'
+
+# Don't override eza settings if it is installed
+if ! which eza >/dev/null 2>&1; then
+  alias ll='ls -l --color=auto'
+  alias la='ls -la --color=auto'
+fi
 
 # =============================================================================
 # Neovim
