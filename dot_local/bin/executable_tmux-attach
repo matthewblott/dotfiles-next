@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+IFS=$'\n\t'
+
+readonly __arguments_number="$#"
+readonly __arguments_values="$@"
+
+if [[ __arguments_number -eq 0 ]]; then
+  echo "Session name required"
+else
+  tmux attach -t "$__arguments_values"
+fi

@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+# Terminate script on first error
+set -o errexit
+
+# Terminate script if uninitialized variable is used
+set -o nounset
+
+# Return the exit code of the first failed command
+set -o pipefail
+
+# Only split words on newlines and tab characters (i.e. no spaces)
+# See: http://redsymbol.net/articles/unofficial-bash-strict-mode/
+IFS=$'\n\t'
+
+readonly __arguments_number="$#"
+readonly __arguments_values="$@"
+
+if [[ __arguments_number -eq 0 ]]; then
+  echo "Instructions required"
+else
+  code1=$(tgpt --code "${__arguments_values}")
+
+  first_line=$(echo "$code1" | head -n 1)
+
+  language=""
+
+  # Attempt to find which programming language the code is written in
+  if [[ "${code1}" =~ "csharp" || "${code1}" =~ "c#" ]]; then
+    language="cs"
+  elif [[ "${code1}" =~ "ruby" ]]; then
+    language="ruby"
+  elif [[ "${code1}" =~ "python" ]]; then
+    language="python"
+  elif [[ "${code1}" =~ "javascript" ]]; then
+    language="js"
+  fi
+
+  # Check the first line starts with backticks 
+  if [[ "${first_line}" =~ ^"\`\`\`" ]]; then
+    # Remove the first and last lines which containt backticks
+    code2=$(echo "${code1}" | sed -e '1d' -e '$d')
+  else
+    code2="${code1}"
+  fi
+  
+  # Copy the code to the clipboard don't bother stripping the last line as shown below.
+  # echo "${code2}" | tr -d '\n' | pbcopy
+  echo "${code2}" | pbcopy
+
+  if [[ "${language}" == "" ]]; then
+    # No language was found so print the code without syntax highlighting
+    echo "${code2}"
+  else
+    # Print the code with syntax highlighting
+    echo "${code2}" | bat -l "${language}"
+  fi
+
+fi

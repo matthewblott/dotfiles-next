@@ -146,6 +146,14 @@ if [ ! -d "${XDG_DATA_HOME}/git" ] ; then
   fi
 fi
 
+# gitguardian
+
+# brew install gitguardian/tap/ggshield
+
+# curl -1sLf \
+#   'https://dl.cloudsmith.io/public/gitguardian/ggshield/setup.deb.sh' \
+#   | sudo -E bash
+
 # httpie
 if ! command -v httpie &> /dev/null; then
   {{ if eq .chezmoi.os "darwin" }}
@@ -240,6 +248,14 @@ if ! command -v ninja-build &> /dev/null; then
     echo 'ninja-build not installed'
   {{ end }}
 fi
+
+# pyenv
+# macos
+# brew install pyenv
+# eval "$(pyenv init -)"
+#
+# linux
+# curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
 
 # rbenv
 if ! command -v rbenv &> /dev/null; then

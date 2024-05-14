@@ -1,0 +1,55 @@
+# Use Vi, not Emacs, style editing
+set editing-mode vi
+
+# Perform filename completion in a case-insensitive fashion
+set completion-ignore-case on
+
+# Filename matching during completion will treat hyphens and underscores as equivalent
+set completion-map-case on
+
+# Show all completions as soon as I press tab, even if there's more than one
+set show-all-if-ambiguous on
+
+# display currently active mode in the terminal
+set show-mode-in-prompt on
+set vi-ins-mode-string "INSERT "
+set vi-cmd-mode-string "COMMAND "
+
+# Keymaps for when we're in command mode (e.g., after hitting ESC)
+set keymap vi-command
+
+# Insert text at the end of the line
+"a": "$A"
+
+# Disable the enter key
+"\C-m": ""
+
+# Disable the up arrow key
+"\e[A": ""
+
+# Disable the down arrow key
+"\e[B": ""
+
+# Disable the right arrow key
+"\e[C": ""
+
+# Disable the left arrow key
+"\e[D": ""
+
+
+# Keymaps for when we're in insert (i.e., typing stuff in) mode
+set keymap vi-insert
+
+"kj": vi-movement-mode
+
+# Disable the up arrow key
+"\e[A": ""
+
+# Disable the down arrow key
+"\e[B": ""
+
+# Disable the right arrow key
+"\e[C": ""
+
+# Disable the left arrow key
+"\e[D": ""

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+IFS=$'\n\t'
+
+readonly __arguments_number="$#"
+readonly __arguments_values="$@"
+readonly __owner=$(git config --get remote.origin.url | awk -F/ '{print $4}')
+
+if [[ __arguments_number -eq 0 ]]; then
+  gh project item-list --owner "${__owner}" 
+else
+  gh project item-list "${__arguments_values}" --owner "${__owner}" 
+fi

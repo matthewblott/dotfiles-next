@@ -1,0 +1,101 @@
+" =============================================================================
+" General Settings
+" =============================================================================
+ 
+set number 
+set relativenumber
+set ideajoin
+set ignorecase
+set visualbell
+set noerrorbell
+set clipboard^=unnamed
+set NERDTree
+
+" Map leader key
+let mapleader = " "
+
+" EasyMotion
+set easymotion
+
+
+" =============================================================================
+" Key Mappings
+" =============================================================================
+
+" Insert mode key mappings
+" -----------------------------------------------------------------------------
+
+imap kj <esc>
+
+" Normal mode key mappings
+" -----------------------------------------------------------------------------
+
+nmap o o<esc>
+nmap O O<esc>
+nmap a $A
+
+nmap <leader>a  <Action>(ShowIntentionActions) 
+nmap <leader>e  <Action>(ActivateProjectToolWindow) 
+nmap <C-h>      <Action>(PrevSplitter) 
+nmap <C-l>      <Action>(NextSplitter) 
+nmap <C-Right>  <Action>(StretchSplitToRight) 
+nmap <C-Left>   <Action>(StretchSplitToLeft) 
+nmap <leader>ff <Action>(SearchEverywhere)
+nmap <leader>fw <Action>(TextSearchAction)
+nmap <leader>fe <Action>(SearchEverywhere)
+nmap <leader>fc <Action>(GotoClass)
+nmap <leader>w  <Action>(SaveDocument) 
+nmap <leader>/  <Action>(CommentByLineComment)
+nmap <leader>c  <Action>(CloseEditor)
+nmap <S-h>      <Action>(PreviousTab)
+nmap <S-l>      <Action>(NextTab)
+nmap <leader>r  <Action>(IdeaVim.ReloadVimRc.reload)
+nmap <leader>m  <Action>(ShowPopupMenu)
+nmap <leader>q  <Action>(ClosePopupMenu)
+nmap <C-Tab>    <Action>(NextProjectWindow)
+nmap <C-S-Tab>  <Action>(PreviousProjectWindow)
+nmap <S>d       <Action>(Delete)
+" nmap <Tab>      <Action>(EditorTab) 
+" nmap <Tab>      <Action>(EditorIndentSelection)
+nmap <Tab>      <Action>(EditorIndentLineOrSelection)
+
+nmap <leader><leader>f  <Plug>(easymotion-f)
+nmap <leader><leader>F  <Plug>(easymotion-F)
+nmap <leader><leader>t  <Plug>(easymotion-t)
+nmap <leader><leader>T  <Plug>(easymotion-T)
+nmap <leader><leader>w  <Plug>(easymotion-w)
+nmap <leader><leader>W  <Plug>(easymotion-W)
+nmap <leader><leader>b  <Plug>(easymotion-b)
+nmap <leader><leader>B  <Plug>(easymotion-B)
+nmap <leader><leader>e  <Plug>(easymotion-e)
+nmap <leader><leader>E  <Plug>(easymotion-E)
+nmap <leader><leader>ge <Plug>(easymotion-ge)
+nmap <leader><leader>gE <Plug>(easymotion-gE)
+nmap <leader><leader>j  <Plug>(easymotion-j)
+nmap <leader><leader>k  <Plug>(easymotion-k)
+nmap <leader><leader>n  <Plug>(easymotion-n)
+nmap <leader><leader>N  <Plug>(easymotion-N)
+nmap <leader><leader>s  <Plug>(easymotion-s)
+
+" Visual mode key mappings
+" -----------------------------------------------------------------------------
+
+vmap <leader>/  <Action>(CommentByLineComment)
+vmap <Tab>      <Action>(EditorIndentSelection)
+
+
+" ==================================================
+" Codeium
+" ==================================================
+
+" Enable
+imap <A-j>      <Action>(codeium.t)
+" Disable
+imap <A-k>      <Action>(codeium.s)
+" Dismiss Completion
+imap <A-CR>   <Action>(EditorSplitLine)
+" Next Suggestion
+imap <A+]>       <Action>(codeium.o) 
+" Previous Suggestion
+imap <A+[>       <Action>(codeium.p)
+
