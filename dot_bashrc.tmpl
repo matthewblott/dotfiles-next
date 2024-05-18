@@ -367,6 +367,28 @@ export SQLITE_HISTORY="${XDG_STATE_HOME}/sqlite/sqlite_history"
 alias chat='tgpt'
 
 # =============================================================================
+# Tldr
+# =============================================================================
+
+export TLDR_CACHE_DIR="${XDG_CACHE_HOME}/tldr"
+
+# =============================================================================
+# Tmux
+# =============================================================================
+
+if which tmux-attach >/dev/null 2>&1; then
+  alias ta='tmux-attach'
+fi
+
+if which tmux-delete >/dev/null 2>&1; then
+  alias td='tmux-delete'
+fi
+
+if which tmux-new >/dev/null 2>&1; then
+  alias tn='tmux-new'
+fi
+
+# =============================================================================
 # Tree
 # =============================================================================
 
@@ -419,3 +441,12 @@ fi
 # =============================================================================
 
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
+
+# =============================================================================
+# SDK Man
+# =============================================================================
+
+# SDK man has to be placed at the end for it to work
+export SDKMAN_DIR="${XDG_DATA_HOME}/sdkman"
+
+[[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"

@@ -12,5 +12,10 @@ readonly __arguments_values="$@"
 if [[ __arguments_number -eq 0 ]]; then
   echo "Session name required"
 else
+  # Rename tab if kitty is installed
+  if which kitty >/dev/null 2>&1; then
+    kitty @ set-tab-title "$__arguments_values"
+  fi
   tmux new -s "$__arguments_values"
+
 fi

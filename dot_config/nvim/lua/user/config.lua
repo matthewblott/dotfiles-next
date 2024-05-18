@@ -245,6 +245,9 @@ local lspconfig = require('lspconfig')
 -- Emmet
 lspconfig.emmet_language_server.setup({})
 
+-- Kotlin
+lspconfig.kotlin_language_server.setup({})
+
 -- TypeScript
 lspconfig.tsserver.setup({})
 

@@ -302,6 +302,11 @@ if ! command -v ripgrep >/dev/null 2>&1; then
   {{ end }}
 fi
 
+# SDK Man
+if ! command -v sdk >/dev/null 2>&1; then
+  curl -s "https://get.sdkman.io" | bash
+fi
+
 # Starship
 if ! command -v starship >/dev/null 2>&1; then
   {{ if eq .chezmoi.os "darwin" }}
