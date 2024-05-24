@@ -33,8 +33,7 @@ CDPATH=".:${HOME}/Development/lab"
 shopt -s cdable_vars
 
 # Bookmarked directories
-# export lab="${HOME}/Development/lab"
-# export documents="${HOME}/Documents"
+export documents="${HOME}/Documents"
 
 # =============================================================================
 # Homebrew
@@ -316,6 +315,28 @@ case ":${PATH}:" in
   *":${PNPM_HOME}:"*) ;;
   *) export PATH="${PNPM_HOME}:${PATH}" ;;
 esac
+
+# =============================================================================
+# Python
+# =============================================================================
+
+export PYENV_ROOT="${XDG_DATA_HOME}/pyenv"
+
+if [ -f "${HOMEBREW_PREFIX}/bin/pyenv" ] ; then
+  eval "$(${HOMEBREW_PREFIX}/bin/pyenv init -)"
+fi
+
+if [ -d "${PYENV_ROOT}/bin" ] ; then
+  export PATH="${PYENV_ROOT}/bin:${PATH}"
+fi
+
+if command -v python3 &> /dev/null; then
+  alias python='python3'
+fi
+
+if command -v pip3 &> /dev/null; then
+  alias pip='pip3'
+fi
 
 # =============================================================================
 # Ruby

@@ -154,7 +154,7 @@ barbar.setup()
 vim.keymap.set('n', '<s-l>', '<cmd>BufferNext<cr>', {})
 vim.keymap.set('n', '<s-h>', '<cmd>BufferPrevious<cr>', {})
 vim.keymap.set('n', '<leader>c', '<cmd>BufferClose<cr>', {})
---vim.keymap.set('n', '<leader>?', '<Cmd>BufferCloseAllButCurrent<CR>', {})
+vim.keymap.set('n', '<leader>v', '<cmd>BufferCloseAllButCurrent<cr>', {})
 
 
 -- =============================================================================

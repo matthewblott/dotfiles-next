@@ -67,6 +67,16 @@ if ! command -v curl &> /dev/null; then
   {{ end }}
 fi
 
+# deb-get
+if ! command -v curl &> /dev/null; then
+  {{ if eq .chezmoi.os "linux" }}
+    sudo apt install curl lsb-release wget
+    curl -sL https://raw.githubusercontent.com/wimpysworld/deb-get/main/deb-get | sudo -E bash -s install deb-get
+  {{ else }}
+    echo 'deb-get not installed'
+  {{ end }}
+fi
+
 # dust
 # if ! command -v dust &> /dev/null; then
   {{ if eq .chezmoi.os "darwin" }}
@@ -250,12 +260,15 @@ if ! command -v ninja-build &> /dev/null; then
 fi
 
 # pyenv
-# macos
-# brew install pyenv
-# eval "$(pyenv init -)"
-#
-# linux
-# curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
+if ! command -v pyenv &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install pyenv
+  {{ else if eq .chezmoi.os "linux" }}
+    curl https://pyenv.run | bash
+  {{ else }}
+    echo 'pyenv not installed'
+  {{ end }}
+fi
 
 # rbenv
 if ! command -v rbenv &> /dev/null; then
