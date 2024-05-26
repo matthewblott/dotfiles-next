@@ -36,6 +36,17 @@ if ! command -v bat &> /dev/null; then
   {{ end }}
 fi
 
+# bison, required for gvm
+if ! command -v bison &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install bison
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install bison -y
+  {{ else }}
+    echo 'bison not installed'
+  {{ end }}
+fi
+
 # build-essential
 if ! command -v build-essential &> /dev/null; then
   {{ if eq .chezmoi.os "linux" }}
@@ -213,20 +224,18 @@ if ! command -v lf &> /dev/null; then
   {{ end }}
 fi
 
-# Requirement for using rbenv
-# libffi-dev
+# libffi-dev, requirement for using rbenv
 {{ if eq .chezmoi.os "linux" }}
   sudo apt install libffi-dev -y
 {{ end }}
 
-# Requirement for using rbenv
-# libyaml-dev
+# 
+# libyaml-dev, requirement for using rbenv
 {{ if eq .chezmoi.os "linux" }}
   sudo apt install libyaml-dev -y
 {{ end }}
 
-# Requirement for using rbenv
-# libzip-dev
+# libzip-dev, requirement for using rbenv
 {{ if eq .chezmoi.os "linux" }}
   sudo apt install libzip-dev -y
 {{ end }}
@@ -248,7 +257,6 @@ if ! command -v neofetch &> /dev/null; then
     echo 'neofetch not installed'
   {{ end }}
 fi
-
 
 # ninja-build
 if ! command -v ninja-build &> /dev/null; then
@@ -456,6 +464,48 @@ fi
 # Also see: .config/readline/inputrc
 
 # =============================================================================
+# GVM
+# =============================================================================
+
+# Remove any previous installations
+rm -rf "${HOME}/.gvm"
+rm -rf "${GVM_ROOT}"
+
+# Install gvm 
+bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+
+mv "${HOME}/.gvm" "${GVM_ROOT}"
+
+# The following file sets the path to ${HOME}/.gvm so it needs to be removed.
+rm -f "${GVM_ROOT}/scripts/gvm"
+
+{{ if eq .chezmoi.os "darwin" }}
+  # An installation of go is required to use gvm.
+  brew install go  
+  # Install the latest version of Go
+  versions="$(gvm listall)"
+  non_production_versions=$(echo "${versions}" | grep -E '(rc|beta|release)')
+  production_versions=$(echo "${versions}" | grep -vxFf <(echo "${non_production_versions}"))
+  latest_version=$(echo "${production_versions}" | tail -n 1)
+  gvm install ${latest_version}
+  gvm use ${latest_version} --default
+  
+  # Uninstall the go that was installed just for using gvm. 
+  brew uninstall go
+{{ else if eq .chezmoi.os "linux" }}
+  # Install the latest version of Go
+  versions="$(gvm listall)"
+  non_production_versions=$(echo "${versions}" | grep -E '(rc|beta|release)')
+  production_versions=$(echo "${versions}" | grep -vxFf <(echo "${non_production_versions}"))
+  latest_version=$(echo "${production_versions}" | tail -n 1)
+  gvm install ${latest_version}
+  gvm use ${latest_version} --default
+  # echo 'go is not installed'
+{{ else }}
+  echo 'gvm not installed'
+{{ end }}
+
+# =============================================================================
 # NVM
 # =============================================================================
 
@@ -463,7 +513,6 @@ if [ ! -d "${NVM_DIR}" ] ; then
   mkdir -p "${NVM_DIR}"
 fi
 
-# if ! command -v nvm >/dev/null 2>&1; then
 if [ ! -d "${NVM_DIR}/.git" ] ; then
   PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash'
 fi
