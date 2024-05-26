@@ -175,6 +175,15 @@ fi
 #   'https://dl.cloudsmith.io/public/gitguardian/ggshield/setup.deb.sh' \
 #   | sudo -E bash
 
+# hexdump, required for gvm
+if ! command -v httpie &> /dev/null; then
+  {{ if eq .chezmoi.os "linux" }}
+    sudo apt-get install bsdmainutils -y
+  {{ else }}
+    echo 'hexdump not installed'
+  {{ end }}
+fi
+
 # httpie
 if ! command -v httpie &> /dev/null; then
   {{ if eq .chezmoi.os "darwin" }}
@@ -482,6 +491,7 @@ rm -f "${GVM_ROOT}/scripts/gvm"
 {{ if eq .chezmoi.os "darwin" }}
   # An installation of go is required to use gvm.
   brew install go  
+  
   # Install the latest version of Go
   versions="$(gvm listall)"
   non_production_versions=$(echo "${versions}" | grep -E '(rc|beta|release)')
@@ -492,7 +502,12 @@ rm -f "${GVM_ROOT}/scripts/gvm"
   
   # Uninstall the go that was installed just for using gvm. 
   brew uninstall go
+
 {{ else if eq .chezmoi.os "linux" }}
+
+  # An installation of go is required to use gvm.
+  sudo apt install golang-go -y 
+
   # Install the latest version of Go
   versions="$(gvm listall)"
   non_production_versions=$(echo "${versions}" | grep -E '(rc|beta|release)')
@@ -500,7 +515,10 @@ rm -f "${GVM_ROOT}/scripts/gvm"
   latest_version=$(echo "${production_versions}" | tail -n 1)
   gvm install ${latest_version}
   gvm use ${latest_version} --default
-  # echo 'go is not installed'
+
+  # Uninstall the go that was installed just for using gvm. 
+  sudo apt remove golang-go -y 
+   
 {{ else }}
   echo 'gvm not installed'
 {{ end }}
