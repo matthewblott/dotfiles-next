@@ -181,7 +181,6 @@ if ! command -v httpie &> /dev/null; then
     echo "deb [arch=amd64 signed-by=/usr/share/keyrings/httpie.gpg] https://packages.httpie.io/deb ./" | sudo tee /etc/apt/sources.list.d/httpie.list > /dev/null
     sudo apt update
     sudo apt install httpie
-    echo 'httpie not installed'
   {{ else }}
     echo 'httpie not installed'
   {{ end }}
