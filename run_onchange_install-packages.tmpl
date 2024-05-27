@@ -6,13 +6,10 @@
 # =============================================================================
 
 # Install homebrew if it's not installed
-
 {{ if eq .chezmoi.os "darwin" }}
-
 if ! command -v brew &> /dev/null; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
-
 {{ end }}
 
 # =============================================================================
@@ -89,24 +86,15 @@ if ! command -v curl &> /dev/null; then
 fi
 
 # dust
-# if ! command -v dust &> /dev/null; then
+if ! command -v dust &> /dev/null; then
   {{ if eq .chezmoi.os "darwin" }}
      brew install dust
-#   # {{ else if eq .chezmoi.os "linux" }}
-#     # deb-get
-#     # if ! command -v deb-get &> /dev/null; then
-#     #   curl -sL https://raw.githubusercontent.com/wimpysworld/deb-get/main/deb-get | sudo -E bash -s install deb-get
-#     # fi
-#     # dust
+  {{ else if eq .chezmoi.os "linux" }}
 #     # does not work on Linux arm
-#     # if ! command -v dust &> /dev/null; then
 #     #   deb-get install du-dust
-#     # fi
-    # echo ' not installed'
-  {{ else }}
     echo ' not installed'
   {{ end }}
-# fi
+fi
 
 # eza
 if ! command -v eza &> /dev/null; then
@@ -189,8 +177,10 @@ if ! command -v httpie &> /dev/null; then
   {{ if eq .chezmoi.os "darwin" }}
     brew install httpie
   {{ else if eq .chezmoi.os "linux" }}
-    # python -m pip install --upgrade pip wheel
-    # python -m pip install httpie
+    curl -SsL https://packages.httpie.io/deb/KEY.gpg | sudo gpg --dearmor -o /usr/share/keyrings/httpie.gpg
+    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/httpie.gpg] https://packages.httpie.io/deb ./" | sudo tee /etc/apt/sources.list.d/httpie.list > /dev/null
+    sudo apt update
+    sudo apt install httpie
     echo 'httpie not installed'
   {{ else }}
     echo 'httpie not installed'
@@ -577,12 +567,6 @@ fi
 if ! command -v perli >/dev/null 2>&1; then
   pnpm install -g perli
 fi
-
-# The better-sqlite3 library installation causes a crash, needs investigation
-# Convert sqlite tables to json
-# if ! command -v sqlite-json >/dev/null 2>&1; then
-#   pnpm install -g sqlite-json
-# fi
 
 # Install yarn in case it's required by thrid parties
 if ! command -v yarn >/dev/null 2>&1; then
