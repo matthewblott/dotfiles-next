@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+# vim: filetype=bash
+
+# Usage: clean-home <source>
+
+# Exit immediately if a command exits with a non-zero status
+set -euo pipefail
+
+IFS=$'\n\t'
+
+# android
+if [ -d "${ANDROID_HOME}" ] ; then
+  rm -rf "${HOME}/.android"
+fi
+
+# bash_sessions
+# rm -rf "${HOME}/.bash_sessions"
+
+# DS_Store
+{{ if eq .chezmoi.os "darwin" }}
+  rm -rf "${HOME}/.DS_Store"
+{{ end }}
+
+# emulator_console_auth_token
+rm -rf .emulator_console_auth_token
+
+# gradle
+if [ -d "${GRADLE_USER_HOME}" ] ; then
+  rm -rf "${HOME}/.gradle"
+fi
+
+# hawtjni - java native
+rm -rf "${HOME}/.hawtjni"
+
+# irb_history
+rm -rf "${HOME}/.irb_history"
+
+# kotlinc
+rm -rf "${HOME}/.kotlinc_history"
+
+# maven 
+if [ -d "${XDG_CONFIG_HOME}/maven" ] ; then
+  rm -rf "${HOME}/.m2"
+fi
+
+# npm
+if [ -d "${XDG_DATA_HOME}/npm" ] ; then
+  rm -rf "${HOME}/.npm"
+fi

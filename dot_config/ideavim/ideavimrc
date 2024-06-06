@@ -58,6 +58,7 @@ nmap <S>d       <Action>(Delete)
 " nmap <Tab>      <Action>(EditorTab) 
 " nmap <Tab>      <Action>(EditorIndentSelection)
 nmap <Tab>      <Action>(EditorIndentLineOrSelection)
+nmap <leader>v  <Action>(CloseAllEditorsButActive)
 
 nmap <leader><leader>f  <Plug>(easymotion-f)
 nmap <leader><leader>F  <Plug>(easymotion-F)

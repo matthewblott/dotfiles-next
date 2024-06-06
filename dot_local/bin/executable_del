@@ -7,8 +7,6 @@ set -euo pipefail
 
 IFS=$'\n\t'
 
-debug=true
-
 _trash() {
 
   local source="${1}"
