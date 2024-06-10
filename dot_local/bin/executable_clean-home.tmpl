@@ -9,12 +9,12 @@ set -euo pipefail
 IFS=$'\n\t'
 
 # android
-if [ -d "${ANDROID_HOME}" ] ; then
+if [ -d "${ANDROID_HOME}" ] && [ -d "${HOME}/.android" ] ; then
   rm -rf "${HOME}/.android"
 fi
 
 # bash_sessions
-# rm -rf "${HOME}/.bash_sessions"
+rm -rf "${HOME}/.bash_sessions"
 
 # DS_Store
 {{ if eq .chezmoi.os "darwin" }}
@@ -47,3 +47,9 @@ fi
 if [ -d "${XDG_DATA_HOME}/npm" ] ; then
   rm -rf "${HOME}/.npm"
 fi
+
+# wget
+rm -rf "${HOME}/.wget-hsts"
+
+# zsh
+rm -rf "${HOME}/.zshrc"

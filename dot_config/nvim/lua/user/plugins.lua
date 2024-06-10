@@ -24,6 +24,13 @@ require('lazy').setup({
     build = 'make' 
   },
   {
+    'camgraff/telescope-tmux.nvim',
+    lazy = false,
+    dependencies = {
+      'norcalli/nvim-terminal.lua',
+    },
+  },
+  {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
