@@ -372,7 +372,8 @@ export REDISCLI_HISTFILE="${XDG_DATA_HOME}/redis/rediscli_history"
 
 {{ else if eq .chezmoi.os "linux" }}
 
-  export RBENV_ROOT="${HOME}/.rbenv"
+  # export RBENV_ROOT="${HOME}/.rbenv"
+  export RBENV_ROOT="${XDG_DATA_HOME}/rbenv"
 
 {{ end }}
 

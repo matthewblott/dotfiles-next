@@ -423,8 +423,8 @@ if ! command -v xdg-ninja &> /dev/null; then
   {{ if eq .chezmoi.os "darwin" }}
     brew install xdg-ninja
   {{ else if eq .chezmoi.os "linux" }}
-    # Clone the repository somewhere, then run the ./xdg-ninja.sh script.
-    echo 'xdg-ninja not installed'
+    git clone "https://github.com/b3nj5m1n/xdg-ninja" "${XDG_DATA_HOME}/xdg-ninja"
+    ln -s "${XDG_DATA_HOME}/xdg-ninja/xdg-ninja.sh" "${HOME}/.local/bin/xdg-ninja"
   {{ else }}
     echo 'xdg-ninja not installed'
   {{ end }}
