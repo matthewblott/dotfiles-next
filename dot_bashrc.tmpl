@@ -367,14 +367,10 @@ export REDISCLI_HISTFILE="${XDG_DATA_HOME}/redis/rediscli_history"
 # rbenv
 
 {{ if eq .chezmoi.os "darwin" }}
-
   export RBENV_ROOT="${XDG_DATA_HOME}/rbenv"
-
 {{ else if eq .chezmoi.os "linux" }}
-
   # export RBENV_ROOT="${HOME}/.rbenv"
   export RBENV_ROOT="${XDG_DATA_HOME}/rbenv"
-
 {{ end }}
 
 if [ -f "${HOMEBREW_PREFIX}/bin/rbenv" ] ; then
