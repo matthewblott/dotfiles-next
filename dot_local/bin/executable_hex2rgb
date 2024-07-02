@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+IFS=$'\n\t'
+
+hex_to_rgb() {
+  hex=${1#"#"}
+  r=$(echo "ibase=16; ${hex:0:2}" | bc)
+  g=$(echo "ibase=16; ${hex:2:2}" | bc)
+  b=$(echo "ibase=16; ${hex:4:2}" | bc)
+  echo "RGB: ($r, $g, $b)"
+}
+
+if [ $# -eq 0 ]; then
+  echo "Usage: hex_to_rgb <hex_color>"
+  exit 1
+fi
+
+hex="${1}"
+hex_to_rgb "${hex}"

@@ -6,5 +6,5 @@ set -euo pipefail
 
 IFS=$'\n\t'
 
-source="${1}"
-touch "${source}"
+src="${1}"
+touch "${src}"

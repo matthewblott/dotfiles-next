@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# Usage: text-mocking <source>
+
+set -euo pipefail
+
+# Disable for this function
+# IFS=$'\n\t'
+
+mocking_text() {
+  local input="$*"
+  local result=""
+  local toggle=0
+  local i  
+
+  for (( i=0; i<${#input}; i++ )); do
+    char="${input:$i:1}"
+    if [[ $toggle -eq 0 ]]; then
+      result+=$(echo "$char" | tr '[:upper:]' '[:lower:]')
+      toggle=1
+    else
+      result+=$(echo "$char" | tr '[:lower:]' '[:upper:]')
+      toggle=0
+    fi
+  done
+
+  echo "$result"
+}
+
+result_output=$(mocking_text "$*")
+echo "$result_output"
