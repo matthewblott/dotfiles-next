@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+calc() {
+  local input="$*"
+
+  bc --mathlib --expression="$input"
+}
+
+result=$(calc "$*")
+
+echo "$result"
