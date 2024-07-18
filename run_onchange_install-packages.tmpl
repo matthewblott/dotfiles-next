@@ -322,10 +322,14 @@ if ! command -v ripgrep >/dev/null 2>&1; then
   {{ end }}
 fi
 
-# SDK Man
-if ! command -v sdk >/dev/null 2>&1; then
-  curl -s "https://get.sdkman.io" | bash
-fi
+{{ if eq .installs.java true }}
+
+  # SDK Man
+  if ! command -v sdk >/dev/null 2>&1; then
+    curl -s "https://get.sdkman.io" | bash
+  fi
+
+{{ end }}
 
 # Starship
 if ! command -v starship >/dev/null 2>&1; then
@@ -466,119 +470,131 @@ fi
 # GVM
 # =============================================================================
 
-# Remove any previous installations
-rm -rf "${HOME}/.gvm"
-rm -rf "${GVM_ROOT}"
+{{ if eq .installs.go true }}
 
-# Install gvm 
-bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+  # Remove any previous installations
+  rm -rf "${HOME}/.gvm"
+  rm -rf "${GVM_ROOT}"
 
-mv "${HOME}/.gvm" "${GVM_ROOT}"
+  # Install gvm 
+  bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
 
-# The following file sets the path to ${HOME}/.gvm so it needs to be removed.
-rm -f "${GVM_ROOT}/scripts/gvm"
+  mv "${HOME}/.gvm" "${GVM_ROOT}"
 
-{{ if eq .chezmoi.os "darwin" }}
-  # An installation of go is required to use gvm.
-  brew install go  
-  
-  # Install the latest version of Go
-  versions="$(gvm listall)"
-  non_production_versions=$(echo "${versions}" | grep -E '(rc|beta|release)')
-  production_versions=$(echo "${versions}" | grep -vxFf <(echo "${non_production_versions}"))
-  latest_version=$(echo "${production_versions}" | tail -n 1)
-  gvm install ${latest_version}
-  gvm use ${latest_version} --default
-  
-  # Uninstall the go that was installed just for using gvm. 
-  brew uninstall go
+  # The following file sets the path to ${HOME}/.gvm so it needs to be removed.
+  rm -f "${GVM_ROOT}/scripts/gvm"
 
-{{ else if eq .chezmoi.os "linux" }}
+  {{ if eq .chezmoi.os "darwin" }}
+    # An installation of go is required to use gvm.
+    brew install go  
+    
+    # Install the latest version of Go
+    versions="$(gvm listall)"
+    non_production_versions=$(echo "${versions}" | grep -E '(rc|beta|release)')
+    production_versions=$(echo "${versions}" | grep -vxFf <(echo "${non_production_versions}"))
+    latest_version=$(echo "${production_versions}" | tail -n 1)
+    gvm install ${latest_version}
+    gvm use ${latest_version} --default
+    
+    # Uninstall the go that was installed just for using gvm. 
+    brew uninstall go
 
-  # An installation of go is required to use gvm.
-  sudo apt install golang-go -y 
+  {{ else if eq .chezmoi.os "linux" }}
 
-  # Install the latest version of Go
-  versions="$(gvm listall)"
-  non_production_versions=$(echo "${versions}" | grep -E '(rc|beta|release)')
-  production_versions=$(echo "${versions}" | grep -vxFf <(echo "${non_production_versions}"))
-  latest_version=$(echo "${production_versions}" | tail -n 1)
-  gvm install ${latest_version}
-  gvm use ${latest_version} --default
+    # An installation of go is required to use gvm.
+    sudo apt install golang-go -y 
 
-  # Uninstall the go that was installed just for using gvm. 
-  sudo apt remove golang-go -y 
-   
-{{ else }}
-  echo 'gvm not installed'
+    # Install the latest version of Go
+    versions="$(gvm listall)"
+    non_production_versions=$(echo "${versions}" | grep -E '(rc|beta|release)')
+    production_versions=$(echo "${versions}" | grep -vxFf <(echo "${non_production_versions}"))
+    latest_version=$(echo "${production_versions}" | tail -n 1)
+    gvm install ${latest_version}
+    gvm use ${latest_version} --default
+
+    # Uninstall the go that was installed just for using gvm. 
+    sudo apt remove golang-go -y 
+     
+  {{ else }}
+    echo 'gvm not installed'
+  {{ end }}
+
+  # Todo
+  # Remove or disable the following line:
+  # . "$GVM_ROOT/scripts/env/cd" && cd .
+  # from the following file:
+  # ${GVM_ROOT}/scripts/gvm-default
+
 {{ end }}
-
-# Todo
-# Remove or disable the following line:
-# . "$GVM_ROOT/scripts/env/cd" && cd .
-# from the following file:
-# ${GVM_ROOT}/scripts/gvm-default
 
 # =============================================================================
 # NVM
 # =============================================================================
 
-if [ ! -d "${NVM_DIR}" ] ; then
-  mkdir -p "${NVM_DIR}"
-fi
+{{ if eq .installs.node true }}
 
-if [ ! -d "${NVM_DIR}/.git" ] ; then
-  # Todo
-  # Get the latest version of NVM
-  PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash'
-fi
+  if [ ! -d "${NVM_DIR}" ] ; then
+    mkdir -p "${NVM_DIR}"
+  fi
 
-# Install the latest LTS version if it doesn't exist
-if ! command -v node >/dev/null 2>&1; then
-  # Filter to get the latest LTS version
-  lts_version=$(nvm ls-remote --lts | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' | tail -n 1)
-  nvm install "${lts_version}"
-fi
+  if [ ! -d "${NVM_DIR}/.git" ] ; then
+    # Todo
+    # Get the latest version of NVM
+    PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash'
+  fi
+
+  # Install the latest LTS version if it doesn't exist
+  if ! command -v node >/dev/null 2>&1; then
+    # Filter to get the latest LTS version
+    lts_version=$(nvm ls-remote --lts | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' | tail -n 1)
+    nvm install "${lts_version}"
+  fi
+
+{{ end }}
 
 # =============================================================================
 # PNPM Packages
 # =============================================================================
 
-# First install pnpm with npm because it's already installed with nvm
-if ! command -v pnpm >/dev/null 2>&1; then
-  npm install -g pnpm
-fi
+if command -v npm >/dev/null 2>&1; then
 
-if ! command -v browser-sync >/dev/null 2>&1; then
-  pnpm install -g browser-sync
-fi
+  # First install pnpm with npm because it's already installed with nvm
+  if ! command -v pnpm >/dev/null 2>&1; then
+    npm install -g pnpm
+  fi
 
-# Spellchecker for code
-if ! command -v cspell >/dev/null 2>&1; then
-  pnpm install -g cspell 
-fi
+  if ! command -v browser-sync >/dev/null 2>&1; then
+    pnpm install -g browser-sync
+  fi
 
-# Scaffolder sometimes used by third parties
-if ! command -v degit >/dev/null 2>&1; then
-  pnpm install -g degit
-fi
+  # Spellchecker for code
+  if ! command -v cspell >/dev/null 2>&1; then
+    pnpm install -g cspell 
+  fi
 
-if ! command -v faker-cli >/dev/null 2>&1; then
-  pnpm install -g faker-cli
-fi
+  # Scaffolder sometimes used by third parties
+  if ! command -v degit >/dev/null 2>&1; then
+    pnpm install -g degit
+  fi
 
-if ! command -v http-server >/dev/null 2>&1; then
-  pnpm install -g http-server
-fi
+  if ! command -v faker-cli >/dev/null 2>&1; then
+    pnpm install -g faker-cli
+  fi
 
-# Perl REPL
-if ! command -v perli >/dev/null 2>&1; then
-  pnpm install -g perli
-fi
+  if ! command -v http-server >/dev/null 2>&1; then
+    pnpm install -g http-server
+  fi
 
-# Install yarn in case it's required by thrid parties
-if ! command -v yarn >/dev/null 2>&1; then
-  pnpm install -g yarn
+  # Perl REPL
+  if ! command -v perli >/dev/null 2>&1; then
+    pnpm install -g perli
+  fi
+
+  # Install yarn in case it's required by thrid parties
+  if ! command -v yarn >/dev/null 2>&1; then
+    pnpm install -g yarn
+  fi
+
 fi
 
 # =============================================================================
