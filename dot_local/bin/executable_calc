@@ -8,6 +8,10 @@ calc() {
   bc --mathlib --expression="$input"
 }
 
+# Need to change the above function because --expression is macOS only
+# echo "scale=4;a=5; b=3; a / b" | bc --mathlib
+# echo "a=5; b=3; a / b" | bc --mathlib
+
 result=$(calc "$*")
 
 echo "$result"

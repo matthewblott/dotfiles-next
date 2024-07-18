@@ -528,6 +528,8 @@ if [ ! -d "${NVM_DIR}" ] ; then
 fi
 
 if [ ! -d "${NVM_DIR}/.git" ] ; then
+  # Todo
+  # Get the latest version of NVM
   PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash'
 fi
 
