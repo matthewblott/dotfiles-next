@@ -213,6 +213,11 @@ vim.keymap.set('i', '<c-j>', function() return vim.fn['codeium#CycleCompletions'
 vim.keymap.set('i', '<c-l>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
 vim.keymap.set('i', '<c-h>', function() return vim.fn['codeium#Complete']() end, { expr = true, silent = true })
 
+-- Disable for certain file types
+vim.g.codeium_filetypes = {
+  markdown = false,
+}
+
 
 -- =============================================================================
 -- Mason
