@@ -144,6 +144,11 @@ local tree = require('nvim-tree')
 tree.setup({
   -- Although on_attach isn't called here without the line below the keymappings above will not work.
   on_attach = tree_on_attach,
+  actions = {
+    open_file = {
+      resize_window = false, -- Prevent the window from resizing when opening a file
+    },
+  },
 })
 
 local tree_api = require('nvim-tree.api')
