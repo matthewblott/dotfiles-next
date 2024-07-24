@@ -106,13 +106,20 @@ local function tree_on_attach(bufnr)
     return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
   end
 
+  local function open_node_if_directory()
+    local node = api.tree.get_node_under_cursor()
+    if node.type == 'directory' then
+      api.node.open.tab()
+    end
+  end
+
   -- default mappings
   api.config.mappings.default_on_attach(bufnr)
   
   vim.keymap.set('n', 'y', api.fs.copy.node, opts('Copy node'))
   vim.keymap.set('n', 'n', api.fs.create, opts('New file'))
   vim.keymap.set('n', 'h', api.node.open.tab, opts('Close node'))
-  vim.keymap.set('n', 'l', api.node.open.tab, opts('Open node'))
+  vim.keymap.set('n', 'l', open_node_if_directory, opts('Open node'))
   vim.keymap.set('n', 'm', api.fs.rename_full, opts('Move'))
   vim.keymap.set('n', '<s-p>', api.node.open.preview, opts('Preview'))
 
