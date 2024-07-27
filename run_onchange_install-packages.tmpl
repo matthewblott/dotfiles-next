@@ -503,12 +503,20 @@ fi
     # An installation of go is required to use gvm.
     sudo apt install golang-go -y 
 
+    # Fix required for the following error:
+    # https://github.com/moovweb/gvm/issues/188
+    source "$GVM_ROOT/scripts/env/gvm"
+
     # Install the latest version of Go
     versions="$(gvm listall)"
     non_production_versions=$(echo "${versions}" | grep -E '(rc|beta|release)')
     production_versions=$(echo "${versions}" | grep -vxFf <(echo "${non_production_versions}"))
     latest_version=$(echo "${production_versions}" | tail -n 1)
     gvm install ${latest_version}
+
+    # Fix required for the following error:
+    # https://github.com/moovweb/gvm/issues/188
+    source "$GVM_ROOT/scripts/env/gvm"
     gvm use ${latest_version} --default
 
     # Uninstall the go that was installed just for using gvm. 
