@@ -210,18 +210,6 @@ if ! command -v kitty; then
   {{ end }}
 fi
 
-# lf
-if ! command -v lf &> /dev/null; then
-  {{ if eq .chezmoi.os "darwin" }}
-    brew install lf 
-  {{ else if eq .chezmoi.os "linux" }}
-    # No package for linux arm, need to install with go
-    echo 'lf not installed'
-  {{ else }}
-    echo 'lf not installed'
-  {{ end }}
-fi
-
 # libffi-dev, requirement for using rbenv
 {{ if eq .chezmoi.os "linux" }}
   sudo apt install libffi-dev -y
@@ -537,6 +525,23 @@ fi
   # ${GVM_ROOT}/scripts/gvm-default
 
 {{ end }}
+
+# lf
+if ! command -v lf &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install lf 
+    # icons 
+    curl "https://raw.githubusercontent.com/gokcehan/lf/master/etc/colors.example" -o "${HOME}/.config/lf/colors"
+    curl "https://raw.githubusercontent.com/gokcehan/lf/master/etc/icons.example" -o "${HOME}/.config/lf/icons"
+  {{ else if eq .chezmoi.os "linux" }}
+    env CGO_ENABLED=0 go install -ldflags="-s -w" github.com/gokcehan/lf@latest
+    # icons 
+    curl "https://raw.githubusercontent.com/gokcehan/lf/master/etc/colors.example" -o "${HOME}/.config/lf/colors"
+    curl "https://raw.githubusercontent.com/gokcehan/lf/master/etc/icons.example" -o "${HOME}/.config/lf/icons"
+  {{ else }}
+    echo 'lf not installed'
+  {{ end }}
+fi
 
 # =============================================================================
 # NVM
