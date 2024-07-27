@@ -17,5 +17,4 @@ else
     kitty @ set-tab-title "$__arguments_values"
   fi
   tmux new -s "$__arguments_values"
-
 fi

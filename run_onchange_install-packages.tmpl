@@ -265,6 +265,17 @@ if ! command -v ninja-build &> /dev/null; then
   {{ end }}
 fi
 
+# pwgen
+if ! command -v pwgen &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install pwgen 
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install pwgen -y
+  {{ else }}
+    echo 'neofetch not installed'
+  {{ end }}
+fi
+
 # pyenv
 if ! command -v pyenv &> /dev/null; then
   {{ if eq .chezmoi.os "darwin" }}
