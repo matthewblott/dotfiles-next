@@ -53,11 +53,11 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 keymap('n', 'a', '$A', opts)
-keymap('n', 'o', 'o<ESC>', opts)
-keymap('n', '<S-o>', 'O<ESC>', opts)
+keymap('n', 'o', 'o<esc>', opts)
+keymap('n', '<s-o>', 'O<esc>', opts)
 
-keymap('i', 'kj', '<ESC>', opts)
-keymap('n', '<leader>w', '<cmd>write<CR>', opts)
+keymap('i', 'kj', '<esc>', opts)
+keymap('n', '<leader>w', '<cmd>write<cr>', opts)
 
 -- Window Navigation
 keymap('n', '<C-h>', '<C-w>h', opts)
@@ -66,8 +66,8 @@ keymap('n', '<C-k>', '<C-w>k', opts)
 keymap('n', '<C-l>', '<C-w>l', opts)
 
 -- Indentation
-keymap('v', '<Tab>', '>gv', opts)
-keymap('v', '<S-Tab>', '<gv', opts)
+keymap('v', '<tab>', '>gv', opts)
+keymap('v', '<s-tab>', '<gv', opts)
 
 
 -- =============================================================================
@@ -107,17 +107,38 @@ local function tree_on_attach(bufnr)
   end
 
   local function toggle_node_if_directory()
-    local node = api.tree.get_node_under_cursor()
-    if node.type == 'directory' then
+    local current_node = api.tree.get_node_under_cursor()
+    -- local node = api.tree.get_node_under_cursor()
+    if current_node.type == 'directory' then
       api.node.open.tab()
     end
   end
+
+  local function handle_node()
+    local current_node = api.tree.get_node_under_cursor()
+    -- if not current_node then
+    --   print("No node selected")
+    --   return
+    -- end
+
+    -- Get the full path of the selected node
+    local node_path = current_node.absolute_path
+
+    -- Execute the bash script with the node path as an argument
+    local cmd = string.format("bash ${HOME}/.local/bin/del '%s'", node_path)
+    os.execute(cmd)
+  end
+
 
   -- default mappings
   api.config.mappings.default_on_attach(bufnr)
   
   vim.keymap.set('n', 'y', api.fs.copy.node, opts('Copy node'))
   vim.keymap.set('n', 'n', api.fs.create, opts('New file'))
+
+  vim.keymap.set('n', 'd', handle_node, opts('Delete file'))
+
+
   vim.keymap.set('n', 'h', toggle_node_if_directory, opts('Close node'))
   vim.keymap.set('n', 'l', toggle_node_if_directory, opts('Open node'))
   vim.keymap.set('n', 'm', api.fs.rename_full, opts('Move'))
@@ -125,8 +146,8 @@ local function tree_on_attach(bufnr)
 
   -- nvim-tree-preview
   vim.keymap.set('n', 'P', preview.watch, opts 'Preview (Watch)')
-  vim.keymap.set('n', '<Esc>', preview.unwatch, opts 'Close Preview/Unwatch')
-  vim.keymap.set('n', '<Tab>', function()
+  vim.keymap.set('n', '<esc>', preview.unwatch, opts 'Close Preview/Unwatch')
+  vim.keymap.set('n', '<tab>', function()
     local ok, node = pcall(api.tree.get_node_under_cursor)
     if ok and node then
       if node.type == 'directory' then
@@ -210,6 +231,18 @@ vim.keymap.set('n', '<leader><leader>h', splits.swap_buf_left)
 vim.keymap.set('n', '<leader><leader>j', splits.swap_buf_down)
 vim.keymap.set('n', '<leader><leader>k', splits.swap_buf_up)
 vim.keymap.set('n', '<leader><leader>l', splits.swap_buf_right)
+
+
+-- =============================================================================
+-- Pencil
+-- =============================================================================
+
+vim.api.nvim_create_autocmd({"FileType"}, {
+  pattern = {"markdown", "text"},
+  callback = function()
+    vim.cmd("PencilSoft")
+  end
+})
 
 
 -- =============================================================================
@@ -419,7 +452,7 @@ cmp.setup({
   -- the completions to work.
   mapping = cmp.mapping.preset.insert({
     -- `Enter` key to confirm completion
-    ['<CR>'] = cmp.mapping.confirm({select = false}),
+    ['<cr>'] = cmp.mapping.confirm({select = false}),
 
     -- Ctrl+Space to trigger completion menu
     -- ['<C-Space>'] = cmp.mapping.complete(),
