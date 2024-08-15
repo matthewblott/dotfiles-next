@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# vim: filetype=bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+IFS=$'\n\t'
+
+gitignore() { 
+  local source="${1}"
+
+  curl -sL "https://www.toptal.com/developers/gitignore/api/${source}" ;
+}
+
+readonly __arguments_values="$@"
+
+result=$(gitignore "${__arguments_values}")
+
+echo "$result"
