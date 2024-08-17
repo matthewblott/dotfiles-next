@@ -60,7 +60,7 @@ if ! command -v cmake &> /dev/null; then
   {{ else if eq .chezmoi.os "linux" }}
     sudo apt install cmake -y
   {{ else }}
-    echo ' not installed'
+    echo 'cmake not installed'
   {{ end }}
 fi
 
@@ -71,7 +71,19 @@ if ! command -v curl &> /dev/null; then
   {{ else if eq .chezmoi.os "linux" }}
     sudo apt install curl -y
   {{ else }}
-    echo ' not installed'
+    echo 'curl not installed'
+  {{ end }}
+fi
+
+# Put here because it's required for gh install (need to change script to use curl)
+# wget
+if ! command -v wget &> /dev/null; then
+  {{ if eq .chezmoi.os "darwin" }}
+    brew install wget 
+  {{ else if eq .chezmoi.os "linux" }}
+    sudo apt install wget -y
+  {{ else }}
+    echo 'wget not installed'
   {{ end }}
 fi
 
@@ -134,12 +146,17 @@ fi
   sudo apt install gettext -y
 {{ end }}
 
-
 # gh
 if ! command -v gh &> /dev/null; then
   {{ if eq .chezmoi.os "darwin" }}
     brew install gh
   {{ else if eq .chezmoi.os "linux" }}
+    # Some extra work is required for Debian
+    sudo mkdir -p -m 755 /etc/apt/keyrings
+    wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null
+    sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+    sudo apt update
     sudo apt install gh -y
   {{ else }}
     echo ' not installed'
