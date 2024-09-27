@@ -168,6 +168,16 @@ if not vim.g.vscode then
   }
 end
 
+local wk = {}
+
+if not vim.g.vscode then
+  wk = {
+    'folke/which-key.nvim',
+    event = 'VeryLazy',
+  }
+end
+
+
 return {
   theme, 
   telescope, 
@@ -189,4 +199,6 @@ return {
   luaSnip,
   codeium,
   gp,
+  wk,
 }
+

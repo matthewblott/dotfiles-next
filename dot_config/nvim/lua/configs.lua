@@ -11,8 +11,8 @@ if pcall(require, 'telescope') then
 
   local builtin = require('telescope.builtin')
 
-  vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-  vim.keymap.set('n', '<leader>fF', '', { callback = function() builtin.find_files({ hidden = true, no_ignore = true }) end, desc = "Find files" })
+  vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Find files' })
+  vim.keymap.set('n', '<leader>fF', '', { callback = function() builtin.find_files({ hidden = true, no_ignore = true }) end, desc = 'Find files (include hidden)' })
   vim.keymap.set('n', '<leader>fw', builtin .live_grep, {})
   vim.keymap.set('n', '<leader>fb', builtin .buffers, {})
   vim.keymap.set('n', '<leader>fh', builtin .help_tags, {})
@@ -210,11 +210,11 @@ end
 
 
 -- =============================================================================
--- LSP
+-- Which Key 
 -- =============================================================================
 
-if pcall(require, 'lspmappings') then
-  require('lspmappings')
+if vim.fn.exists(':WhichKey') == 2 then
+
 end
 
 
@@ -261,3 +261,4 @@ if pcall(require, 'gp') then
   vim.keymap.set({ 'v','n' }, '<leader>gf', "<cmd>GpChatFinder<cr>", { noremap = true, silent = true, buffer = true })
 
 end
+
