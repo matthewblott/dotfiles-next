@@ -265,4 +265,3 @@ if pcall(require, 'gp') then
   vim.keymap.set({ 'v','n' }, '<leader>gf', "<cmd>GpChatFinder<cr>", { noremap = true, silent = true, buffer = true, desc = 'GPT Chat Finder' })
 
 end
-
