@@ -23,6 +23,21 @@ if pcall(require, 'telescope') then
 
 end
 
+-- =============================================================================
+-- Treesitter
+-- =============================================================================
+
+if vim.fn.exists(':TSInstall') == 2 then
+  local treesitter = require('nvim-treesitter.configs')
+
+  treesitter.setup {
+    highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+    },
+  }
+end
+
 
 -- =============================================================================
 -- NVim Tree
