@@ -11,11 +11,15 @@ if pcall(require, 'telescope') then
 
   local builtin = require('telescope.builtin')
 
+  -- local function opts(desc)
+  --   return { desc = 'telescope: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  -- end
+
   vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Find files' })
   vim.keymap.set('n', '<leader>fF', '', { callback = function() builtin.find_files({ hidden = true, no_ignore = true }) end, desc = 'Find files (include hidden)' })
-  vim.keymap.set('n', '<leader>fw', builtin .live_grep, {})
-  vim.keymap.set('n', '<leader>fb', builtin .buffers, {})
-  vim.keymap.set('n', '<leader>fh', builtin .help_tags, {})
+  vim.keymap.set('n', '<leader>fw', builtin.live_grep, { desc = 'Find word' })
+  vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Find buffers' })
+  vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Find tags' })
 
 end
 
@@ -107,7 +111,7 @@ if pcall(require, 'nvim-tree-preview') then
 
   local tree_api = require('nvim-tree.api')
 
-  vim.keymap.set('n', '<leader>e', tree_api.tree.toggle, {})
+  vim.keymap.set('n', '<leader>e', tree_api.tree.toggle, { desc = 'Toggle nvim-tree' })
 
 end
 
@@ -122,10 +126,10 @@ if pcall(require, 'barbar') then
 
   barbar.setup()
 
-  vim.keymap.set('n', '<s-l>', '<cmd>BufferNext<cr>', {})
-  vim.keymap.set('n', '<s-h>', '<cmd>BufferPrevious<cr>', {})
-  vim.keymap.set('n', '<leader>c', '<cmd>BufferClose<cr>', {})
-  vim.keymap.set('n', '<leader>v', '<cmd>BufferCloseAllButCurrent<cr>', {})
+  vim.keymap.set('n', '<s-l>', '<cmd>BufferNext<cr>', { desc = 'Next buffer' })
+  vim.keymap.set('n', '<s-h>', '<cmd>BufferPrevious<cr>', { desc = 'Previous buffer' })
+  vim.keymap.set('n', '<leader>c', '<cmd>BufferClose<cr>', { desc = 'Close buffer' })
+  vim.keymap.set('n', '<leader>v', '<cmd>BufferCloseAllButCurrent<cr>', { desc = 'Close all but current buffer' })
 
 end
 
@@ -142,8 +146,8 @@ if pcall(require, 'Comment') then
 
   local comment_api = require('Comment.api')
 
-  vim.keymap.set('n', '<leader>/', function() comment_api.toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1) end, {})
-  vim.keymap.set('v', '<leader>/', "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", {})
+  vim.keymap.set('n', '<leader>/', function() comment_api.toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1) end, { desc = 'Comment lines' })
+  vim.keymap.set('v', '<leader>/', "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", { desc = 'Comment lines' })
 
 end
 
@@ -162,21 +166,21 @@ if pcall(require, 'smart-splits') then
   -- resizing splits
   -- these keymaps will also accept a range,
   -- for example `10<A-h>` will `resize_left` by `(10 * config.default_amount)`
-  vim.keymap.set('n', '<c-left>', splits.resize_left)
-  vim.keymap.set('n', '<c-down>', splits.resize_down)
-  vim.keymap.set('n', '<c-up>', splits.resize_up)
-  vim.keymap.set('n', '<c-right>', splits.resize_right)
+  vim.keymap.set('n', '<c-left>', splits.resize_left, { desc = 'Resize left' })
+  vim.keymap.set('n', '<c-down>', splits.resize_down, { desc = 'Resize down' })
+  vim.keymap.set('n', '<c-up>', splits.resize_up, { desc = 'Resize up' })
+  vim.keymap.set('n', '<c-right>', splits.resize_right, { desc = 'Resize right' })
   -- moving between splits
-  vim.keymap.set('n', '<c-h>', splits.move_cursor_left)
-  vim.keymap.set('n', '<c-j>', splits.move_cursor_down)
-  vim.keymap.set('n', '<c-k>', splits.move_cursor_up)
-  vim.keymap.set('n', '<c-l>', splits.move_cursor_right)
-  vim.keymap.set('n', '<c-\\>', splits.move_cursor_previous)
+  vim.keymap.set('n', '<c-h>', splits.move_cursor_left, { desc = 'Move cursor left' })
+  vim.keymap.set('n', '<c-j>', splits.move_cursor_down, { desc = 'Move cursor down' })
+  vim.keymap.set('n', '<c-k>', splits.move_cursor_up, { desc = 'Move cursor up' })
+  vim.keymap.set('n', '<c-l>', splits.move_cursor_right, { desc = 'Move cursor right' })
+  vim.keymap.set('n', '<c-\\>', splits.move_cursor_previous, { desc = 'Move cursor to previous split' })
   -- swapping buffers between windows
-  vim.keymap.set('n', '<leader><leader>h', splits.swap_buf_left)
-  vim.keymap.set('n', '<leader><leader>j', splits.swap_buf_down)
-  vim.keymap.set('n', '<leader><leader>k', splits.swap_buf_up)
-  vim.keymap.set('n', '<leader><leader>l', splits.swap_buf_right)
+  vim.keymap.set('n', '<leader><leader>h', splits.swap_buf_left, { desc = 'Swap buffer left' })
+  vim.keymap.set('n', '<leader><leader>j', splits.swap_buf_down, { desc = 'Swap buffer down' })
+  vim.keymap.set('n', '<leader><leader>k', splits.swap_buf_up, { desc = 'Swap buffer up' })
+  vim.keymap.set('n', '<leader><leader>l', splits.swap_buf_right, { desc = 'Swap buffer right' })
 
 end
 
@@ -214,7 +218,7 @@ end
 -- =============================================================================
 
 if vim.fn.exists(':WhichKey') == 2 then
-
+  -- Add extra bindings here
 end
 
 
@@ -227,11 +231,11 @@ if vim.fn.exists(':Codeium') == 2 then
   -- N.B. when running Codeium Auth make sure you are running in tmux,
   -- the token won't be parsed properly otherwise and you'll receive an error.
 
-  vim.keymap.set('i', '<c-g>', function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
-  vim.keymap.set('i', '<c-k>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true, silent = true })
-  vim.keymap.set('i', '<c-j>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true, silent = true })
-  vim.keymap.set('i', '<c-l>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
-  vim.keymap.set('i', '<c-h>', function() return vim.fn['codeium#Complete']() end, { expr = true, silent = true })
+  vim.keymap.set('i', '<c-g>', function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true, desc = 'Codeium Accept' })
+  vim.keymap.set('i', '<c-k>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true, silent = true, desc = 'Codeium Cycle Completions' })
+  vim.keymap.set('i', '<c-j>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true, silent = true, desc = 'Codeium Cycle Completions' })
+  vim.keymap.set('i', '<c-l>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true, desc = 'Codeium Clear' })
+  vim.keymap.set('i', '<c-h>', function() return vim.fn['codeium#Complete']() end, { expr = true, silent = true, desc = 'Codeium Complete' })
 
   -- Disable for certain file types
   vim.g.codeium_filetypes = {
@@ -253,12 +257,12 @@ if pcall(require, 'gp') then
     -- openai_api_key = os.getenv("OPENAI_API_KEY"),
   })
 
-  vim.keymap.set({ 'v','n' }, '<leader>gr', "<cmd>GpRewrite<cr>", { noremap = true, silent = true, buffer = true })
-  vim.keymap.set({ 'v','n' }, '<leader>ga', "<cmd>GpAppend<cr>", { noremap = true, silent = true, buffer = true })
-  vim.keymap.set({ 'v','n' }, '<leader>gp', "<cmd>GpPrepend<cr>", { noremap = true, silent = true, buffer = true })
-  vim.keymap.set({ 'v','n' }, '<leader>gi', "<cmd>GpImplement<cr>", { noremap = true, silent = true, buffer = true })
-  vim.keymap.set({ 'v','n' }, '<leader>gt', "<cmd>GpChatToggle popup<cr>", { noremap = true, silent = true, buffer = true })
-  vim.keymap.set({ 'v','n' }, '<leader>gf', "<cmd>GpChatFinder<cr>", { noremap = true, silent = true, buffer = true })
+  vim.keymap.set({ 'v','n' }, '<leader>gr', "<cmd>GpRewrite<cr>", { noremap = true, silent = true, buffer = true, desc = 'GPT Rewrite' })
+  vim.keymap.set({ 'v','n' }, '<leader>ga', "<cmd>GpAppend<cr>", { noremap = true, silent = true, buffer = true, desc = 'GPT Append' })
+  vim.keymap.set({ 'v','n' }, '<leader>gp', "<cmd>GpPrepend<cr>", { noremap = true, silent = true, buffer = true, desc = 'GPT Prepend' })
+  vim.keymap.set({ 'v','n' }, '<leader>gi', "<cmd>GpImplement<cr>", { noremap = true, silent = true, buffer = true, desc = 'GPT Implement' })
+  vim.keymap.set({ 'v','n' }, '<leader>gt', "<cmd>GpChatToggle popup<cr>", { noremap = true, silent = true, buffer = true, desc = 'GPT Chat' })
+  vim.keymap.set({ 'v','n' }, '<leader>gf', "<cmd>GpChatFinder<cr>", { noremap = true, silent = true, buffer = true, desc = 'GPT Chat Finder' })
 
 end
 
